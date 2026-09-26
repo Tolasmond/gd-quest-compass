@@ -1,5 +1,6 @@
 # Public repository allowlist: source, build/launch scripts, guide data,
-# documentation, and third-party license. All other local files stay private.
+# documentation, third-party license, and Windows build workflow.
+# All other local files stay private.
 /*
 !/.gitignore
 !/LICENSE
@@ -10,6 +11,13 @@
 !/Launch-GrimDawn-With-Overlay.cmd
 !/Launch-GrimDawn-With-Overlay.ps1
 !/Start-PositionOverlay.ps1
+
+# Windows build workflow.
+!/.github/
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/build.yml
 
 # Runtime source. Standalone local diagnostics and guide CLI are excluded.
 !/src/

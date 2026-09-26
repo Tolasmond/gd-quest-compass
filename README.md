@@ -44,20 +44,31 @@ Extract the package to a writable folder, preserving this layout:
 
 ```text
 gd-quest-compass/
+  README.md
+  LICENSE
+  THIRD_PARTY_NOTICES.md
   Launch-GrimDawn-With-Overlay.cmd
   Launch-GrimDawn-With-Overlay.ps1
+  Start-PositionOverlay.ps1
   build/
     position-loader.exe
     position-overlay.dll
   data/guide/
+    README.md
     defaults.json
     personal.json
     quest-entities.json
+  vendor/Detours/
+    LICENSE
 ```
+
+The Windows build workflow provides `gd-quest-compass-windows-x64.zip` as a
+download on its successful Actions run. Extract that ZIP before launching.
 
 ## Build from source
 
-Building requires Visual Studio with the MSVC C++ x64 tools and a Windows SDK.
+To build from source, clone this repository. Building requires Visual Studio
+with the MSVC C++ x64 tools and a Windows SDK.
 `setup-msvc.cmd` finds the installed toolchain through Visual Studio Installer's
 `vswhere`. Run `build.cmd` from a Windows command prompt; it produces
 `build/position-overlay.dll` and `build/position-loader.exe`. Then use the
