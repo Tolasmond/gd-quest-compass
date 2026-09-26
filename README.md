@@ -1,0 +1,120 @@
+# gd-quest-compass
+
+GD Quest Compass is a Windows overlay for repeat Grim Dawn playthroughs. It
+reads the current character's position, tracked quests, and quest progress,
+then points toward saved guide locations. The guide includes quest waypoints,
+nearby devotion shrines, and recorded secret entrances. Bearings show direction;
+they do not navigate around walls or choose a walkable path.
+
+The public guide starts in `data/guide/personal.json` and can grow through the
+in-game Guide Recorder. Recordings are separate from generated game data. A
+recorded approach or enemy sighting is guidance, not proof of an exact spawn.
+
+## Use a prebuilt package
+
+To use a packaged build, you need Windows x64, Grim Dawn installed through
+Steam with its 64-bit executable at `<game directory>\x64\Grim Dawn.exe`, and
+the [latest supported Microsoft Visual C++ x64 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+Visual Studio and the Windows SDK are only needed to
+compile the project. Extract the package to a writable folder, preserving this
+layout:
+
+```text
+gd-quest-compass/
+  Launch-GrimDawn-With-Overlay.cmd
+  Launch-GrimDawn-With-Overlay.ps1
+  build/
+    position-loader.exe
+    position-overlay.dll
+  data/guide/
+    defaults.json
+    personal.json
+    quest-entities.json
+```
+
+The Recorder saves changes to `data/guide/personal.json` and writes local
+recovery and session files beside it, so the guide folder must be writable.
+Run `Launch-GrimDawn-With-Overlay.cmd`. It starts Grim Dawn through Steam if
+needed, waits for the game window and required modules, and loads the overlay.
+If one game instance is already running, it uses that instance. The loader
+finds the installation path from the running process; no path configuration
+file is required.
+
+The overlay checks the installed `Game.dll` and `Engine.dll` before installing
+its hooks. It currently accepts only the game binaries inspected for this
+version of the project. If the game has updated, the loader refuses to hook it
+until compatibility is checked and the accepted fingerprints are updated.
+
+## Build from source
+
+Building requires Visual Studio with the MSVC C++ x64 tools and a Windows SDK.
+`setup-msvc.cmd` finds the installed toolchain through Visual Studio Installer's
+`vswhere`. Run `build.cmd` from a Windows command prompt; it produces
+`build/position-overlay.dll` and `build/position-loader.exe`. Then use the
+launch instructions above.
+
+Exit Grim Dawn before rebuilding `build/position-overlay.dll`; Windows keeps the
+injected DLL locked while the game is running.
+
+## Running and diagnostics
+
+The loader verifies that the target process is a 64-bit `x64/Grim Dawn.exe`
+with `Game.dll` and `Engine.dll` loaded before attaching. To inspect the
+running executable path without attaching, run
+`build/position-loader.exe --check-process <PID>`.
+
+The overlay stays loaded until the game exits. The launcher archives the
+previous session log before loading; the current log is
+`build/position-overlay.log`.
+
+For a game already running, `Start-PositionOverlay.ps1` is a manual loader.
+The one-click launcher performs the extra readiness checks and log archiving.
+
+## Controls
+
+Use these hotkeys while the game is active:
+
+| Hotkey | Action |
+| --- | --- |
+| Ctrl+Shift+F8 | Open the Guide Recorder |
+| Ctrl+Shift+F9 | Choose the next eligible approach or target |
+| Ctrl+Shift+F10 | Cycle triangle only, triangle plus panel, and hidden |
+| Ctrl+Shift+F11 | Choose the next tracked quest |
+| Ctrl+Shift+F12 | Show the next quest-details page |
+
+The green triangle points toward the selected quest destination. Yellow marks a
+nearby recorded secret. Cyan marks a nearby shrine/totem.
+
+To add a waypoint, stand at the location, open the Guide Recorder, choose an
+unfinished objective, and press **Record location**. The position is captured
+when the Recorder opens; close and reopen it after moving. You can link an
+existing location, reorder linked waypoints, undo a change, and reload the guide
+without rebuilding. Outdoor crossing proposals require review before they are
+saved as guide connections. See [Guide Recorder usage](data/guide/README.md).
+
+Quest completion comes from the game's quest state. An enemy's appearance,
+death, or disappearance alone does not complete or reactivate an objective.
+
+## Guide files
+
+- `data/guide/defaults.json`: baseline guide definitions informed by extracted
+  game data and reviewed mappings.
+- `data/guide/personal.json`: public recorded locations, links, and overrides.
+- `data/guide/quest-entities.json`: character choices used by the Recorder.
+
+The Recorder writes changes to `personal.json` and creates a local `.bak`
+recovery copy. Active selection and unreviewed crossing proposals are stored
+separately as local session state. See [Guide Recorder usage](data/guide/README.md)
+for editing and recovery details.
+
+## Acknowledgments
+
+This project would not have been possible without
+[nonoroazoro's gd-cli](https://github.com/nonoroazoro/gd-cli). Its game-data
+queries made the guide's quest, entity, and location research possible. The
+published guide also includes separately reviewed and recorded locations.
+
+The position-reading approach is adapted from
+[Grimdark](https://github.com/ahicks92/grimdark). Microsoft Detours source is
+included under `vendor/Detours`. See [third-party notices](THIRD_PARTY_NOTICES.md)
+and the [Detours license](vendor/Detours/LICENSE).

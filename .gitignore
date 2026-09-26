@@ -1,0 +1,44 @@
+# Public repository allowlist: source, build/launch scripts, guide data,
+# documentation, and third-party license. All other local files stay private.
+/*
+!/.gitignore
+!/README.md
+!/THIRD_PARTY_NOTICES.md
+!/build.cmd
+!/setup-msvc.cmd
+!/Launch-GrimDawn-With-Overlay.cmd
+!/Launch-GrimDawn-With-Overlay.ps1
+!/Start-PositionOverlay.ps1
+
+# Runtime source. Standalone local diagnostics and guide CLI are excluded.
+!/src/
+!/src/**
+/src/guide_cli.cpp
+/src/hang_diagnostics.cpp
+
+# Pinned Microsoft Detours files needed by build.cmd.
+!/vendor/
+/vendor/*
+!/vendor/Detours/
+/vendor/Detours/*
+!/vendor/Detours/LICENSE
+!/vendor/Detours/README.md
+!/vendor/Detours/src/
+/vendor/Detours/src/*
+!/vendor/Detours/src/creatwth.cpp
+!/vendor/Detours/src/detours.cpp
+!/vendor/Detours/src/detours.h
+!/vendor/Detours/src/disasm.cpp
+!/vendor/Detours/src/image.cpp
+!/vendor/Detours/src/modules.cpp
+!/vendor/Detours/src/uimports.cpp
+
+# Guide files needed to run and record. Session state and backups remain local.
+!/data/
+/data/*
+!/data/guide/
+/data/guide/*
+!/data/guide/README.md
+!/data/guide/defaults.json
+!/data/guide/personal.json
+!/data/guide/quest-entities.json
