@@ -1,23 +1,46 @@
 # gd-quest-compass
 
-GD Quest Compass is a Windows overlay for repeat Grim Dawn playthroughs. It
-reads the current character's position, tracked quests, and quest progress,
+GD Quest Compass is a Windows overlay for repeat Grim Dawn playthroughs.
+Using GD Quest Compass does not make any additions or modifications to the
+installed Grim Dawn Steam files.
+
+Status: I have only played through the original campaign while making
+guide recordings. No other guidance is available at this time.
+
+GD Quest Compass reads the current character's position, tracked quests, and quest progress,
 then points toward saved guide locations. The guide includes quest waypoints,
 nearby devotion shrines, and recorded secret entrances. Bearings show direction;
 they do not navigate around walls or choose a walkable path.
 
-The public guide starts in `data/guide/personal.json` and can grow through the
-in-game Guide Recorder. Recordings are separate from generated game data. A
-recorded approach or enemy sighting is guidance, not proof of an exact spawn.
+## Why?
+I have played the first three expansions throroughly and generally have an idea where
+to go for most of the quests. I'm lazy/impatient with the new expansion and would like
+guidance on where to go without having to look at ad-filled online wikis. I don't want
+to have to depend on my memory for future playthroughs. I'd rather take notes once and
+be guided with future characters any time my memory fails me.
+
+I do NOT encourage others to play this way as it is more immersive to play without
+guides. However, for single-player offline games, I believe player's should be able to
+play their games however they want.
+
+## Disclaimer
+This project was built using AI agent(s). I have not looked at the code as this is just a game
+and I care only about the results. I opened up Codex and asked if it was possible and it
+found two repos (see Acknowledgements at the end) that helped provide enough functionality
+that I was willing to put in the time to fill in missing data as I play.
+
+Comments, suggestions, bug-reports, etc. are welcome. However, this project is low-priority for
+me so don't expect quick responses to any communications.
 
 ## Use a prebuilt package
 
 To use a packaged build, you need Windows x64, Grim Dawn installed through
-Steam with its 64-bit executable at `<game directory>\x64\Grim Dawn.exe`, and
-the [latest supported Microsoft Visual C++ x64 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
-Visual Studio and the Windows SDK are only needed to
-compile the project. Extract the package to a writable folder, preserving this
-layout:
+Steam with its 64-bit executable at `<game directory>\x64\Grim Dawn.exe`.
+The binaries use the Microsoft Visual C++ runtime. If a compatible x64 runtime
+is not already installed, install the
+[Microsoft Visual C++ x64 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+Visual Studio and the Windows SDK are only needed to compile the project.
+Extract the package to a writable folder, preserving this layout:
 
 ```text
 gd-quest-compass/
@@ -34,11 +57,11 @@ gd-quest-compass/
 
 The Recorder saves changes to `data/guide/personal.json` and writes local
 recovery and session files beside it, so the guide folder must be writable.
+
 Run `Launch-GrimDawn-With-Overlay.cmd`. It starts Grim Dawn through Steam if
 needed, waits for the game window and required modules, and loads the overlay.
 If one game instance is already running, it uses that instance. The loader
-finds the installation path from the running process; no path configuration
-file is required.
+finds the installation path from the running process.
 
 The overlay checks the installed `Game.dll` and `Engine.dll` before installing
 its hooks. It currently accepts only the game binaries inspected for this
@@ -59,9 +82,7 @@ injected DLL locked while the game is running.
 ## Running and diagnostics
 
 The loader verifies that the target process is a 64-bit `x64/Grim Dawn.exe`
-with `Game.dll` and `Engine.dll` loaded before attaching. To inspect the
-running executable path without attaching, run
-`build/position-loader.exe --check-process <PID>`.
+with `Game.dll` and `Engine.dll` loaded before attaching.
 
 The overlay stays loaded until the game exits. The launcher archives the
 previous session log before loading; the current log is

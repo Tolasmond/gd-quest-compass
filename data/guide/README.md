@@ -57,6 +57,5 @@ provide obstacle-aware pathfinding.
 | `observed-connections.json` | Local, unreviewed crossing proposals |
 
 Recorder changes save immediately. `personal.json` is the file to carry forward
-or contribute to the public guide. The backup and session-state files are local
-and excluded from the repository. If an external edit changes the guide while
+or contribute to the public guide. If an external edit changes the guide while
 the Recorder is open, choose **Reload guide** before saving again.
