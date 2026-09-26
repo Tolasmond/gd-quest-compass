@@ -1,9 +1,10 @@
+param([switch]$Log)
 $ErrorActionPreference = 'Stop'
 
 $loader = Join-Path $PSScriptRoot 'build\position-loader.exe'
 $overlay = Join-Path $PSScriptRoot 'build\position-overlay.dll'
 if (-not (Test-Path -LiteralPath $loader) -or -not (Test-Path -LiteralPath $overlay)) {
-    throw 'Build files are missing. Run build.cmd first.'
+    throw 'Overlay files are missing from build/. Re-extract the package or build from source.'
 }
 $games = @(Get-Process -Name 'Grim Dawn' -ErrorAction SilentlyContinue)
 if ($games.Count -gt 1) { throw 'More than one Grim Dawn process is running; close the extra instance first.' }
@@ -46,16 +47,19 @@ if (-not $readySince -or ((Get-Date) - $readySince).TotalSeconds -lt 5) {
     throw 'Timed out waiting for the Grim Dawn window and game modules. Overlay was not loaded.'
 }
 
-# The injected DLL overwrites its log at startup. Retain the preceding session.
-$log = Join-Path $PSScriptRoot 'build\position-overlay.log'
-if (Test-Path -LiteralPath $log) {
-    $archive = Join-Path $PSScriptRoot 'build\log-archive'
-    New-Item -ItemType Directory -Path $archive -Force | Out-Null
-    $stamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
-    Copy-Item -LiteralPath $log -Destination (Join-Path $archive "position-overlay-$stamp.log")
+if ($Log) {
+    # A logging launch overwrites its log; retain the preceding session.
+    $logPath = Join-Path $PSScriptRoot 'build\position-overlay.log'
+    if (Test-Path -LiteralPath $logPath) {
+        $archive = Join-Path $PSScriptRoot 'build\log-archive'
+        New-Item -ItemType Directory -Path $archive -Force | Out-Null
+        $stamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
+        Copy-Item -LiteralPath $logPath -Destination (Join-Path $archive "position-overlay-$stamp.log")
+    }
 }
 
 Write-Host 'Loading the overlay...'
-& $loader $game.Id
+if ($Log) { & $loader --log $game.Id }
+else { & $loader $game.Id }
 if ($LASTEXITCODE -ne 0) { throw "Position loader failed ($LASTEXITCODE)." }
 Write-Host 'Ready. Load a character whenever you like.'

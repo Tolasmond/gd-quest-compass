@@ -122,9 +122,12 @@ void DrawRecorderChoice(const DRAWITEMSTRUCT& item) {
     if(item.itemID==static_cast<UINT>(-1)) return;
     bool selected=(item.itemState&ODS_SELECTED)!=0, disabled=(item.itemState&ODS_DISABLED)!=0;
     HBRUSH brush=CreateSolidBrush(selected?RecSelected:RecField);FillRect(item.hDC,&item.rcItem,brush);DeleteObject(brush);
-    wchar_t text[1024]{};
-    if(item.CtlType==ODT_COMBOBOX) SendMessageW(item.hwndItem,CB_GETLBTEXT,item.itemID,reinterpret_cast<LPARAM>(text));
-    else SendMessageW(item.hwndItem,LB_GETTEXT,item.itemID,reinterpret_cast<LPARAM>(text));
+    // Labels come from editable guide data; size the buffer from the item's length.
+    bool combo=item.CtlType==ODT_COMBOBOX;
+    LRESULT length=SendMessageW(item.hwndItem,combo?CB_GETLBTEXTLEN:LB_GETTEXTLEN,item.itemID,0);
+    std::wstring buffer(length>0?static_cast<size_t>(length)+1:1,L'\0');
+    if(length>0) SendMessageW(item.hwndItem,combo?CB_GETLBTEXT:LB_GETTEXT,item.itemID,reinterpret_cast<LPARAM>(buffer.data()));
+    const wchar_t* text=buffer.c_str();
     RECT label=item.rcItem;label.left+=7;label.right-=4;
     SetBkMode(item.hDC,TRANSPARENT);SetTextColor(item.hDC,disabled?RecDisabled:RecParchment);
     SelectObject(item.hDC,recorderBodyFont);DrawTextW(item.hDC,text,-1,&label,DT_LEFT|DT_VCENTER|DT_SINGLELINE|DT_END_ELLIPSIS);

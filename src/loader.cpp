@@ -18,8 +18,9 @@ static uintptr_t ModuleBase(DWORD pid, const wchar_t* name) {
 }
 int wmain(int argc, wchar_t** argv) {
     bool checkOnly = argc == 3 && !_wcsicmp(argv[1], L"--check-process");
-    if (!(argc == 2 || checkOnly)) { puts("Usage: position-loader.exe <game PID> | --check-process <game PID>"); return 1; }
-    wchar_t* end; unsigned long value = wcstoul(checkOnly ? argv[2] : argv[1], &end, 10);
+    bool enableLog = argc == 3 && !_wcsicmp(argv[1], L"--log");
+    if (!(argc == 2 || checkOnly || enableLog)) { puts("Usage: position-loader.exe [--log] <game PID> | --check-process <game PID>"); return 1; }
+    wchar_t* end; unsigned long value = wcstoul(checkOnly || enableLog ? argv[2] : argv[1], &end, 10);
     if (!value || *end) { puts("Invalid PID."); return 1; }
     DWORD pid = value;
     DWORD access = checkOnly ? PROCESS_QUERY_LIMITED_INFORMATION :
@@ -57,18 +58,35 @@ int wmain(int argc, wchar_t** argv) {
         printf("DLL path transfer failed: %lu\n", GetLastError());
         if (allocation) VirtualFreeEx(proc, allocation, 0, MEM_RELEASE); CloseHandle(proc); return 1;
     }
+    HANDLE logRequest = nullptr;
+    if (enableLog) {
+        wchar_t eventName[80];
+        swprintf_s(eventName, L"Local\\GDQuestCompassLog-%lu", pid);
+        logRequest = CreateEventW(nullptr, TRUE, FALSE, eventName);
+        if (!logRequest || GetLastError() == ERROR_ALREADY_EXISTS) {
+            puts("Cannot establish a unique logging request.");
+            if (logRequest) CloseHandle(logRequest);
+            VirtualFreeEx(proc, allocation, 0, MEM_RELEASE); CloseHandle(proc); return 1;
+        }
+    }
     HANDLE thread = CreateRemoteThread(proc, nullptr, 0, remote, allocation, 0, nullptr);
-    if (!thread) { printf("Load thread failed: %lu\n", GetLastError()); VirtualFreeEx(proc, allocation, 0, MEM_RELEASE); CloseHandle(proc); return 1; }
+    if (!thread) { printf("Load thread failed: %lu\n", GetLastError()); if (logRequest) CloseHandle(logRequest); VirtualFreeEx(proc, allocation, 0, MEM_RELEASE); CloseHandle(proc); return 1; }
     DWORD wait = WaitForSingleObject(thread, 10000);
     CloseHandle(thread);
     if (wait != WAIT_OBJECT_0) {
         puts("Load did not finish in 10 seconds. Do not retry until the game restarts.");
         // The remote thread may still use this string: retain it until process exit.
+        if (logRequest) CloseHandle(logRequest);
         CloseHandle(proc); return 1;
     }
     VirtualFreeEx(proc, allocation, 0, MEM_RELEASE);
     bool loaded = ModuleBase(pid, L"position-overlay.dll") != 0;
+    bool loggingReady = !enableLog;
+    if (loaded && enableLog) loggingReady = WaitForSingleObject(logRequest, 10000) == WAIT_OBJECT_0;
+    if (logRequest) CloseHandle(logRequest);
     CloseHandle(proc);
-    puts(loaded ? "DLL loaded. Check position-overlay.log for hook/window status, then return to the game." : "DLL load failed.");
-    return loaded ? 0 : 1;
+    if (!loaded) { puts("DLL load failed."); return 1; }
+    if (!loggingReady) { puts("DLL loaded, but logging did not start. Restart the game before retrying."); return 1; }
+    puts(enableLog ? "DLL loaded. Logging to build/position-overlay.log; return to the game." : "DLL loaded. Return to the game.");
+    return 0;
 }

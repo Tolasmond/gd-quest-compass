@@ -13,14 +13,14 @@ nearby devotion shrines, and recorded secret entrances. Bearings show direction;
 they do not navigate around walls or choose a walkable path.
 
 ## Why?
-I have played the first three expansions throroughly and generally have an idea where
+I have played the first three expansions thoroughly and generally have an idea where
 to go for most of the quests. I'm lazy/impatient with the new expansion and would like
 guidance on where to go without having to look at ad-filled online wikis. I don't want
 to have to depend on my memory for future playthroughs. I'd rather take notes once and
 be guided with future characters any time my memory fails me.
 
 I do NOT encourage others to play this way as it is more immersive to play without
-guides. However, for single-player offline games, I believe player's should be able to
+guides. However, for single-player offline games, I believe players should be able to
 play their games however they want.
 
 ## Disclaimer
@@ -55,19 +55,6 @@ gd-quest-compass/
     quest-entities.json
 ```
 
-The Recorder saves changes to `data/guide/personal.json` and writes local
-recovery and session files beside it, so the guide folder must be writable.
-
-Run `Launch-GrimDawn-With-Overlay.cmd`. It starts Grim Dawn through Steam if
-needed, waits for the game window and required modules, and loads the overlay.
-If one game instance is already running, it uses that instance. The loader
-finds the installation path from the running process.
-
-The overlay checks the installed `Game.dll` and `Engine.dll` before installing
-its hooks. It currently accepts only the game binaries inspected for this
-version of the project. If the game has updated, the loader refuses to hook it
-until compatibility is checked and the accepted fingerprints are updated.
-
 ## Build from source
 
 Building requires Visual Studio with the MSVC C++ x64 tools and a Windows SDK.
@@ -81,15 +68,29 @@ injected DLL locked while the game is running.
 
 ## Running and diagnostics
 
-The loader verifies that the target process is a 64-bit `x64/Grim Dawn.exe`
-with `Game.dll` and `Engine.dll` loaded before attaching.
+Run `Launch-GrimDawn-With-Overlay.cmd`. It starts Grim Dawn through Steam if
+needed, waits for the game window and required modules, and loads the overlay.
+If one game instance is already running, it uses that instance. The loader
+finds the installation path from the running process.
 
-The overlay stays loaded until the game exits. The launcher archives the
-previous session log before loading; the current log is
-`build/position-overlay.log`.
+The loader verifies that the target process is a 64-bit `x64/Grim Dawn.exe`.
+The overlay checks the installed `Game.dll` and `Engine.dll` before installing
+its hooks. It currently accepts only the game binaries inspected for this
+version of the project. If the game has updated, the loader refuses to hook it
+until compatibility is checked and the accepted fingerprints are updated.
 
-For a game already running, `Start-PositionOverlay.ps1` is a manual loader.
-The one-click launcher performs the extra readiness checks and log archiving.
+The Recorder saves changes to `data/guide/personal.json` and writes local
+recovery and session files beside it, so the guide folder must be writable.
+
+The overlay stays loaded until the game exits. Diagnostic logging is off by
+default. To record a session for troubleshooting, run
+`Launch-GrimDawn-With-Overlay.cmd -Log`. The log is written to
+`build/position-overlay.log` in the extracted package; a previous log is
+archived before a new logging session.
+
+For a game already running, `Start-PositionOverlay.ps1` is a manual loader;
+pass `-Log` there for diagnostics. The one-click launcher performs the extra
+readiness checks.
 
 ## Controls
 
@@ -139,3 +140,8 @@ The position-reading approach is adapted from
 [Grimdark](https://github.com/ahicks92/grimdark). Microsoft Detours source is
 included under `vendor/Detours`. See [third-party notices](THIRD_PARTY_NOTICES.md)
 and the [Detours license](vendor/Detours/LICENSE).
+
+## License
+
+GD Quest Compass is released under the [MIT License](LICENSE). Third-party
+components keep their own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

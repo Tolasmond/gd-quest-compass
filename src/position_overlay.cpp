@@ -834,17 +834,18 @@ void DrawCompass(HDC dc, const CompassReading& r) {
     RECT name{16, 131, 444, 154};
     DrawTextW(dc, r.destination, -1, &name, DT_LEFT | DT_SINGLELINE | DT_END_ELLIPSIS);
     wchar_t text[200];
-    if (r.valid) swprintf_s(text, L"%s | %.1f units", r.status, r.distance);
-    else wcscpy_s(text, r.status);
+    // Guide hints can exceed this buffer; truncate rather than abort the game.
+    if (r.valid) _snwprintf_s(text, _TRUNCATE, L"%s | %.1f units", r.status, r.distance);
+    else wcsncpy_s(text, r.status, _TRUNCATE);
     RECT status{16, 157, 370, 180};
     DrawTextW(dc, text, -1, &status, DT_LEFT | DT_SINGLELINE | DT_END_ELLIPSIS);
     SetTextColor(dc, RGB(163, 176, 190));
     RECT note{16, 182, 370, 217};
     const wchar_t* cameraNote = r.valid && !r.bearingValid ? L"Camera unavailable: bearing hidden" : L"";
     if (r.approachCount > 1)
-        swprintf_s(text, L"Approach %u of %u | %s\n%s", r.approachNumber, r.approachCount, r.mode, cameraNote);
+        _snwprintf_s(text, _TRUNCATE, L"Approach %u of %u | %s\n%s", r.approachNumber, r.approachCount, r.mode, cameraNote);
     else
-        swprintf_s(text, L"%s\n%s", r.mode, cameraNote);
+        _snwprintf_s(text, _TRUNCATE, L"%s\n%s", r.mode, cameraNote);
     DrawTextW(dc, text, -1, &note, DT_LEFT);
 }
 void ResetTaskFocus() {
@@ -950,7 +951,7 @@ bool Install() {
             L"After a Grim Dawn update, use gd-cli to rebuild its database from the updated game installation. "
             L"Keep personal recordings separate from that database.\n\n"
             L"Verify overlay compatibility before updating its version checks. Rebuilding the database alone does not establish compatibility.\n\n"
-            L"The extraction command is recorded in position-overlay.log and README.md.",
+            L"See the project README for update guidance.",
             L"Grim Dawn overlay - game version changed", MB_OK | MB_ICONWARNING);
         return false;
     }
@@ -1321,9 +1322,21 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
     return DefWindowProcW(hwnd, msg, w, l);
 }
 DWORD WINAPI Run(void*) {
-    wchar_t path[MAX_PATH]; GetModuleFileNameW(module, path, MAX_PATH);
-    wchar_t* slash = wcsrchr(path, L'\\'); if (slash) wcscpy_s(slash + 1, MAX_PATH - (slash + 1 - path), L"position-overlay.log");
-    logFile = _wfsopen(path, L"w", _SH_DENYNO);
+    // The loader holds this event only for an explicit logging launch. Signal
+    // after opening the file so it can report whether logging actually started.
+    wchar_t eventName[80];
+    swprintf_s(eventName, L"Local\\GDQuestCompassLog-%lu", GetCurrentProcessId());
+    HANDLE logRequest = OpenEventW(EVENT_MODIFY_STATE, FALSE, eventName);
+    if (logRequest) {
+        wchar_t path[MAX_PATH]; GetModuleFileNameW(module, path, MAX_PATH);
+        wchar_t* slash = wcsrchr(path, L'\\');
+        if (slash) {
+            wcscpy_s(slash + 1, MAX_PATH - (slash + 1 - path), L"position-overlay.log");
+            logFile = _wfsopen(path, L"w", _SH_DENYNO);
+        }
+        if (logFile) SetEvent(logRequest);
+        CloseHandle(logRequest);
+    }
     Log("Position + zone prototype starting.");
     wchar_t dllPath[MAX_PATH]; GetModuleFileNameW(module, dllPath, MAX_PATH);
     std::wstring folder(dllPath); folder.resize(folder.find_last_of(L"\\/")); folder.resize(folder.find_last_of(L"\\/"));

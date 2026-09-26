@@ -2,6 +2,7 @@
 # documentation, and third-party license. All other local files stay private.
 /*
 !/.gitignore
+!/LICENSE
 !/README.md
 !/THIRD_PARTY_NOTICES.md
 !/build.cmd
