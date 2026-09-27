@@ -109,6 +109,7 @@ Use these hotkeys while the game is active:
 
 | Hotkey | Action |
 | --- | --- |
+| Ctrl+Shift+F7 | Record the current position for the active unfinished quest objective while the Recorder is closed |
 | Ctrl+Shift+F8 | Open the Guide Recorder |
 | Ctrl+Shift+F9 | Choose the next eligible approach or target |
 | Ctrl+Shift+F10 | Cycle triangle only, triangle plus panel, and hidden |
@@ -118,9 +119,12 @@ Use these hotkeys while the game is active:
 The green triangle points toward the selected quest destination. Yellow marks a
 nearby recorded secret. Cyan marks a nearby shrine/totem.
 
-To add a waypoint, stand at the location, open the Guide Recorder, choose an
-unfinished objective, and press **Record location**. The position is captured
-when the Recorder opens; close and reopen it after moving. You can link an
+To quickly add a waypoint for the active objective, stand at the location and
+press **Ctrl+Shift+F7** with the Recorder closed. It captures the current
+position and saves immediately. To choose a different unfinished objective or
+name the location, open the Guide Recorder and press **Record location**. The
+Recorder captures the position when it opens; close and reopen it after moving.
+You can link an
 existing location, reorder linked waypoints, undo a change, and reload the guide
 without rebuilding. Outdoor crossing proposals require review before they are
 saved as guide connections. See [Guide Recorder usage](data/guide/README.md).

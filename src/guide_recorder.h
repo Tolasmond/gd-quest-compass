@@ -12,6 +12,10 @@ bool recordingPositionValid=false;
 std::vector<DetailRow> recordingObjectives;
 std::vector<std::string> recorderLocations;
 std::vector<std::string> recorderLinkedLocations;
+HWND recorderLocationTooltip=nullptr, recorderHoverList=nullptr;
+int recorderHoverRow=-1;
+std::wstring recorderTooltipText;
+constexpr UINT_PTR RecLocationTooltipTimer=301;
 struct RecorderEntityChoice { std::string record, name, roles; bool enemy=false; };
 std::vector<RecorderEntityChoice> recorderQuestEntities;
 bool recorderEnemyChecked=false;
@@ -215,6 +219,7 @@ void FillObservedConnections() {
 std::string SelectedLocation();
 guides::Value LocationById(const std::string& id);
 void UpdateSecretRadiusControl();
+void HideRecorderLocationTooltip();
 std::string NearbySavedWaypoint() {
     if(!recordingPositionValid) return {};
     auto guide=std::atomic_load(&guides::published);
@@ -275,6 +280,7 @@ void UpdateRecorderControls() {
     UpdateOrderControls();
 }
 void FillRecorderLocations() {
+    HideRecorderLocationTooltip();
     std::string keep;try {keep=SelectedLocation();} catch(const std::exception&) {}
     SendMessageW(RecControl(RecLocations),LB_RESETCONTENT,0,0); recorderLocations.clear();
     SendMessageW(RecControl(RecLinkedLocations),LB_RESETCONTENT,0,0);recorderLinkedLocations.clear();
@@ -323,6 +329,70 @@ std::string SelectedLocation() {
     if(i<0||static_cast<size_t>(i)>=recorderLocations.size()) throw std::runtime_error("Select a location from either list first");return recorderLocations[i];
 }
 guides::Value LocationById(const std::string& id) { auto g=std::atomic_load(&guides::published);for(const auto& l:guides::list(g->document,"locations"))if(!guides::removed(l)&&guides::id(l)==id)return l;throw std::runtime_error("Location no longer exists"); }
+void HideRecorderLocationTooltip() {
+    if(recorderWindow) KillTimer(recorderWindow,RecLocationTooltipTimer);
+    if(recorderLocationTooltip && IsWindow(recorderLocationTooltip)) {
+        TOOLINFOW tool{};tool.cbSize=TTTOOLINFOW_V2_SIZE;tool.hwnd=recorderWindow;tool.uId=reinterpret_cast<UINT_PTR>(recorderWindow);
+        SendMessageW(recorderLocationTooltip,TTM_TRACKACTIVATE,FALSE,reinterpret_cast<LPARAM>(&tool));
+    }
+    recorderHoverList=nullptr;recorderHoverRow=-1;
+}
+int RecorderHoveredLocation(HWND list,POINT point) {
+    RECT client{};GetClientRect(list,&client);
+    if(!PtInRect(&client,point)) return -1;
+    DWORD hit=static_cast<DWORD>(SendMessageW(list,LB_ITEMFROMPOINT,0,MAKELPARAM(point.x,point.y)));
+    if(HIWORD(hit)) return -1;
+    const auto& rows=GetDlgCtrlID(list)==RecLinkedLocations?recorderLinkedLocations:recorderLocations;
+    int row=LOWORD(hit);
+    return row>=0 && static_cast<size_t>(row)<rows.size()?row:-1;
+}
+std::wstring RecorderLocationCoordinates(const std::string& id) {
+    auto location=LocationById(id);
+    double x=location.at("x").num(),y=location.at("y").num(),z=location.at("z").num();
+    if(!std::isfinite(x)||!std::isfinite(y)||!std::isfinite(z)) return {};
+    wchar_t coordinates[160]{};
+    swprintf_s(coordinates,L"Coordinates: (%.2f, %.2f, %.2f)",x,y,z);
+    return coordinates;
+}
+void ShowRecorderLocationTooltipAt(HWND list,int row,POINT cursor) {
+    if(!recorderWindow || !recorderLocationTooltip || !list || row<0 || !IsWindowVisible(recorderWindow)) return;
+    const auto& rows=GetDlgCtrlID(list)==RecLinkedLocations?recorderLinkedLocations:recorderLocations;
+    if(static_cast<size_t>(row)>=rows.size()) return;
+    try {
+        recorderTooltipText=RecorderLocationCoordinates(rows[row]);
+        if(recorderTooltipText.empty()) return;
+        TOOLINFOW tool{};tool.cbSize=TTTOOLINFOW_V2_SIZE;tool.hwnd=recorderWindow;tool.uId=reinterpret_cast<UINT_PTR>(recorderWindow);
+        tool.lpszText=recorderTooltipText.data();
+        SendMessageW(recorderLocationTooltip,TTM_UPDATETIPTEXTW,0,reinterpret_cast<LPARAM>(&tool));
+        SendMessageW(recorderLocationTooltip,TTM_TRACKPOSITION,0,MAKELPARAM(cursor.x+16,cursor.y+20));
+        SendMessageW(recorderLocationTooltip,TTM_TRACKACTIVATE,TRUE,reinterpret_cast<LPARAM>(&tool));
+    } catch(const std::exception&) { /* A location removed during a refresh has no tooltip. */ }
+}
+void ShowRecorderLocationTooltip() {
+    if(!recorderHoverList || recorderHoverRow<0) return;
+    POINT cursor{};if(!GetCursorPos(&cursor)) return;
+    POINT point=cursor;ScreenToClient(recorderHoverList,&point);
+    if(RecorderHoveredLocation(recorderHoverList,point)==recorderHoverRow)
+        ShowRecorderLocationTooltipAt(recorderHoverList,recorderHoverRow,cursor);
+}
+LRESULT CALLBACK RecorderLocationListProc(HWND list,UINT msg,WPARAM w,LPARAM l,UINT_PTR,DWORD_PTR) {
+    if(msg==WM_MOUSEMOVE) {
+        POINT point{GET_X_LPARAM(l),GET_Y_LPARAM(l)};
+        int row=RecorderHoveredLocation(list,point);
+        if(list!=recorderHoverList || row!=recorderHoverRow) {
+            HideRecorderLocationTooltip();
+            if(row>=0) {
+                recorderHoverList=list;recorderHoverRow=row;
+                TRACKMOUSEEVENT tracking{sizeof(tracking),TME_LEAVE,list,0};TrackMouseEvent(&tracking);
+                SetTimer(recorderWindow,RecLocationTooltipTimer,1500,nullptr);
+            }
+        }
+    } else if(msg==WM_MOUSELEAVE || msg==WM_MOUSEWHEEL || msg==WM_VSCROLL || msg==WM_HSCROLL ||
+              msg==WM_LBUTTONDOWN || msg==WM_KEYDOWN || msg==WM_DESTROY) {
+        if(list==recorderHoverList) HideRecorderLocationTooltip();
+    }
+    return DefSubclassProc(list,msg,w,l);
+}
 void UpdateSecretRadiusControl() {
     bool secret=false;
     try {
@@ -407,18 +477,60 @@ void ShowChosenQuestEntity() {
     SetRecorderEnemyCheck(choice.enemy);
     UpdateRecorderControls();
 }
-std::string EnsureRecordingTarget(guides::Value& next,const DetailRow& row) {
-    auto g=std::atomic_load(&guides::published);for(const auto& t:g->targets)if(t.questUid==recordingQuest.id&&t.taskUid==row.taskUid&&t.objectiveUid==row.objectiveUid)return t.id;
-    auto t=guides::Value::dict();t["id"]=guides::newId("objective");t["quest_uid"]=recordingQuest.id;t["task_uid"]=row.taskUid;t["objective_uid"]=row.objectiveUid;t["name"]=guides::narrow(ObjectiveLabel(row));t["record"]="";t["enemy"]=false;t["hint"]="Travel to a recorded location";t["provenance"]=guides::provenance("user_objective_mapping");guides::upsert(next,"targets",t);return guides::id(t);
+std::string EnsureRecordingTarget(guides::Value& next,const QuestRow& quest,const DetailRow& row) {
+    auto g=std::atomic_load(&guides::published);for(const auto& t:g->targets)if(t.questUid==quest.id&&t.taskUid==row.taskUid&&t.objectiveUid==row.objectiveUid)return t.id;
+    auto t=guides::Value::dict();t["id"]=guides::newId("objective");t["quest_uid"]=quest.id;t["task_uid"]=row.taskUid;t["objective_uid"]=row.objectiveUid;t["name"]=guides::narrow(ObjectiveLabel(row));t["record"]="";t["enemy"]=false;t["hint"]="Travel to a recorded location";t["provenance"]=guides::provenance("user_objective_mapping");guides::upsert(next,"targets",t);return guides::id(t);
 }
+std::string EnsureRecordingTarget(guides::Value& next,const DetailRow& row) {return EnsureRecordingTarget(next,recordingQuest,row);}
 void BindRecording(guides::Value& next,const std::string& target,const std::string& location) {
     guides::bindLocation(next,target,location);
 }
-guides::Value CapturedLocation() {
-    auto l=guides::Value::dict(); l["id"]=guides::newId("location");l["name"]=RecorderName("Recorded approach");l["zone"]=recordingSample.zoneTag;l["zone_name"]=guides::narrow(recordingSample.zone);
-    l["x"]=static_cast<double>(recordingSample.x);l["y"]=static_cast<double>(recordingSample.y);l["z"]=static_cast<double>(recordingSample.z);l["mode"]="Recorded waypoint";l["provenance"]=guides::provenance("player_position");
-    l["provenance"]["player_zone"]=recordingSample.zoneTag;l["provenance"]["sample_tick"]=std::to_string(recordingSample.time);
+guides::Value CapturedLocation(const Sample& captured,const std::string& name) {
+    auto l=guides::Value::dict(); l["id"]=guides::newId("location");l["name"]=name;l["zone"]=captured.zoneTag;l["zone_name"]=guides::narrow(captured.zone);
+    l["x"]=static_cast<double>(captured.x);l["y"]=static_cast<double>(captured.y);l["z"]=static_cast<double>(captured.z);l["mode"]="Recorded waypoint";l["provenance"]=guides::provenance("player_position");
+    l["provenance"]["player_zone"]=captured.zoneTag;l["provenance"]["sample_tick"]=std::to_string(captured.time);
     return l;
+}
+guides::Value CapturedLocation() {return CapturedLocation(recordingSample,RecorderName("Recorded approach"));}
+bool RecordObjectiveWaypoint(const Sample& captured,const QuestRow& quest,const DetailRow& row,const std::string& name) {
+    auto next=guides::personal;
+    auto target=EnsureRecordingTarget(next,quest,row);
+    auto location=guides::recordLocation(next,CapturedLocation(captured,name));
+    BindRecording(next,target,location);
+    if(!guides::commit(next)) return false;
+    if(hasActiveQuest && activeQuest.id==quest.id) {
+        recordedQuest=quest.id;recordedTarget=target;recordedLocation=location;
+    }
+    return true;
+}
+void RecordActiveObjectiveWaypoint() {
+    try {
+        Sample captured=Snapshot();ULONGLONG now=GetTickCount64();
+        if(!QuestsLive(captured) || !captured.zoneTime || now-captured.zoneTime>1000 || !*captured.zoneTag ||
+           !std::isfinite(captured.x) || !std::isfinite(captured.y) || !std::isfinite(captured.z))
+            throw std::runtime_error("No fresh character position or quest state for waypoint");
+        int questIndex=ReconcileSelection(captured);
+        if(questIndex<0) throw std::runtime_error("No active tracked quest for waypoint");
+        const auto& quest=captured.quests.rows[questIndex];
+        int targetIndex=ChooseTarget(captured,quest,now);
+        if(targetIndex<0 || static_cast<size_t>(targetIndex)>=captured.guide->targets.size())
+            throw std::runtime_error("No active unfinished objective for waypoint");
+        const auto& target=captured.guide->targets[targetIndex];
+        if(!quest.detailsValid || !quest.details) throw std::runtime_error("Active objective details unavailable");
+        for(const auto& row:*quest.details) if(row.kind==DetailKind::Objective && row.taskState==2 &&
+            row.objectiveState==2 && row.taskUid==target.taskUid && row.objectiveUid==target.objectiveUid) {
+            if(RecordObjectiveWaypoint(captured,quest,row,"Recorded approach"))
+                Log("Waypoint saved for active quest objective; guidance updated.");
+            else Log(guides::status.c_str());
+            return;
+        }
+        throw std::runtime_error("Active objective is no longer unfinished");
+    } catch(const std::exception& e) {Log(e.what());}
+}
+void RecordActiveObjectiveHotkey() {
+    if(recorderWindow && IsWindowVisible(recorderWindow)) return;
+    DWORD foregroundPid=0;GetWindowThreadProcessId(GetForegroundWindow(),&foregroundPid);
+    if(foregroundPid==GetCurrentProcessId()) RecordActiveObjectiveWaypoint();
 }
 void ReviewObservedConnection(int action) {
     auto selected=SendMessageW(RecControl(RecConnections),LB_GETCURSEL,0,0);
@@ -478,7 +590,6 @@ void RecorderAction(int action) {
         if(action==209){guides::reload();RefreshArrowChecks();LoadQuestEntityChoices();FillRecorderLocations();RefreshQuestEntityChoice();FillObservedConnections();RecorderStatus(guides::status);return;}
         if(action==208){guides::undoLast();RefreshArrowChecks();FillRecorderLocations();RefreshQuestEntityChoice();FillObservedConnections();RecorderStatus(guides::status);return;}
         auto next=guides::personal;
-        std::string recordedTargetId, recordedLocationId;
         if(action==218 || action==221) {
             auto row=SelectedRecordingObjective();
             auto targetId=EnsureRecordingTarget(next,row);
@@ -570,20 +681,14 @@ void RecorderAction(int action) {
             else if(action==206) { auto location=SelectedLocation();auto merged=guides::merge(guides::defaults,next);bool found=false;for(auto b:guides::list(merged,"bindings"))if(!guides::removed(b)&&b.at("target").str()==target&&b.at("location").str()==location){b["deleted"]=true;guides::upsert(next,"bindings",b);found=true;}if(!found)throw std::runtime_error("That location is not linked to this objective"); }
             else if(action==201) {
                 if(!recordingPositionValid) throw std::runtime_error("No fresh captured position; close and reopen in the game");
-                auto l=CapturedLocation();auto location=guides::recordLocation(next,l);
-                BindRecording(next,target,location);
-                recordedTargetId=target; recordedLocationId=location;
+                if(RecordObjectiveWaypoint(recordingSample,recordingQuest,row,RecorderName("Recorded approach"))) {
+                    FillRecorderLocations();RecorderStatus("Saved; recorded position selected for quest guidance.");
+                } else RecorderStatus(guides::status);
+                return;
             } else throw std::runtime_error("Unknown recorder action");
         }
         if(guides::commit(next)) {
-            if(!recordedLocationId.empty() && hasActiveQuest && activeQuest.id==recordingQuest.id) {
-                recordedQuest=recordingQuest.id;
-                recordedTarget=recordedTargetId; recordedLocation=recordedLocationId;
-            }
             FillRecorderLocations();
-            if(!recordedLocationId.empty() && !recordedLocation.empty()) {
-                RecorderStatus("Saved; recorded position selected for quest guidance.");return;
-            }
             if(action==214) {
                 auto l=LocationById(SelectedLocation());
                 RecorderStatus("Saved secret radius: "+guidejson::dump(l.at("secret_radius"))+" world units. Guidance updated immediately.");return;
@@ -593,6 +698,11 @@ void RecorderAction(int action) {
     } catch(const std::exception& e){RecorderStatus(e.what());}
 }
 LRESULT CALLBACK RecorderProc(HWND hwnd,UINT msg,WPARAM w,LPARAM l) {
+    if(msg==WM_TIMER && w==RecLocationTooltipTimer) {
+        KillTimer(hwnd,RecLocationTooltipTimer);
+        ShowRecorderLocationTooltip();return 0;
+    }
+    if(msg==WM_SHOWWINDOW && !w) HideRecorderLocationTooltip();
     if(msg==WM_ERASEBKGND) return 1;
     if(msg==WM_PAINT) {
         PAINTSTRUCT ps{};HDC dc=BeginPaint(hwnd,&ps);RECT client{};GetClientRect(hwnd,&client);
@@ -646,7 +756,7 @@ LRESULT CALLBACK RecorderProc(HWND hwnd,UINT msg,WPARAM w,LPARAM l) {
     }
     if(msg==WM_COMMAND) { int command=LOWORD(w);if(command==201||command==204||command==205||command==206||command==208||command==209||(command>=211&&command<=216)||command==218||command==221||command==RecApproveConnection||command==RecDismissConnection){RecorderAction(command);return 0;}if(command==210){ShowWindow(hwnd,SW_HIDE);return 0;} }
     if(msg==WM_CLOSE || (msg==WM_COMMAND && LOWORD(w)==IDCANCEL)){ShowWindow(hwnd,SW_HIDE);return 0;}
-    if(msg==WM_DESTROY){ReleaseRecorderTheme();recorderWindow=nullptr;return 0;}
+    if(msg==WM_DESTROY){HideRecorderLocationTooltip();recorderLocationTooltip=nullptr;ReleaseRecorderTheme();recorderWindow=nullptr;return 0;}
     return DefWindowProcW(hwnd,msg,w,l);
 }
 void OpenRecorder() {
@@ -689,6 +799,19 @@ void OpenRecorder() {
         control(L"STATIC",L"Other saved locations",0,390,328,356,22);
         control(L"LISTBOX",L"",RecLinkedLocations,16,353,354,194,WS_BORDER|WS_VSCROLL|WS_HSCROLL|LBS_NOTIFY|WS_TABSTOP);
         control(L"LISTBOX",L"",RecLocations,390,353,356,194,WS_BORDER|WS_VSCROLL|WS_HSCROLL|LBS_NOTIFY|WS_TABSTOP);
+        INITCOMMONCONTROLSEX common{sizeof(common),ICC_WIN95_CLASSES};InitCommonControlsEx(&common);
+        SetWindowSubclass(RecControl(RecLinkedLocations),RecorderLocationListProc,1,0);
+        SetWindowSubclass(RecControl(RecLocations),RecorderLocationListProc,1,0);
+        recorderLocationTooltip=CreateWindowExW(WS_EX_TOPMOST,TOOLTIPS_CLASSW,nullptr,
+            WS_POPUP|TTS_ALWAYSTIP|TTS_NOPREFIX,0,0,0,0,recorderWindow,nullptr,module,nullptr);
+        if(recorderLocationTooltip) {
+            TOOLINFOW tool{};tool.cbSize=TTTOOLINFOW_V2_SIZE;tool.uFlags=TTF_IDISHWND|TTF_TRACK|TTF_ABSOLUTE|TTF_TRANSPARENT;
+            tool.hwnd=recorderWindow;tool.uId=reinterpret_cast<UINT_PTR>(recorderWindow);
+            tool.hinst=module;tool.lpszText=const_cast<wchar_t*>(L"");
+            GetClientRect(recorderWindow,&tool.rect);
+            SendMessageW(recorderLocationTooltip,TTM_ADDTOOLW,0,reinterpret_cast<LPARAM>(&tool));
+            SendMessageW(recorderLocationTooltip,TTM_SETMAXTIPWIDTH,0,420);
+        }
         SendMessageW(RecControl(RecLinkedLocations),LB_SETITEMHEIGHT,0,23);SendMessageW(RecControl(RecLocations),LB_SETITEMHEIGHT,0,23);
         SendMessageW(RecControl(RecLinkedLocations),LB_SETHORIZONTALEXTENT,1000,0);
         SendMessageW(RecControl(RecLocations),LB_SETHORIZONTALEXTENT,1000,0);

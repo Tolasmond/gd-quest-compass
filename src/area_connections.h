@@ -16,7 +16,7 @@ inline bool samePair(const Observation& a,const Observation& b) {
     return (a.from==b.from && a.to==b.to) || (a.from==b.to && a.to==b.from);
 }
 inline bool outdoor(const std::string& tag) {
-    if(tag.rfind("tagMap",0)!=0 || tag.size()>=256) return false;
+    if((tag.rfind("tagMap",0)!=0 && tag.rfind("tagGDX1Map",0)!=0) || tag.size()>=256) return false;
     for(unsigned char c:tag) if(c<33 || c>126) return false;
     return true;
 }

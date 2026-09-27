@@ -4,6 +4,9 @@
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #include <windows.h>
+#include <windowsx.h>
+#include <commctrl.h>
+#pragma comment(lib, "comctl32.lib")
 #include <tlhelp32.h>
 #include <detours.h>
 #include <cmath>
@@ -1046,6 +1049,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
     case WM_NCHITTEST: return HTTRANSPARENT;
     case WM_MOUSEACTIVATE: return MA_NOACTIVATE;
     case WM_HOTKEY:
+        if (w == 6) { RecordActiveObjectiveHotkey(); return 0; }
         if (w == 5) {
             DWORD pid=0; GetWindowThreadProcessId(GetForegroundWindow(), &pid);
             if (pid == GetCurrentProcessId()) OpenRecorder();
@@ -1307,7 +1311,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
             DrawTextW(dc, text, -1, &page, DT_LEFT);
         }
         SetTextColor(dc, RGB(163, 176, 190)); RECT footer{16, bounds.bottom-110, 444, bounds.bottom-2};
-        DrawTextW(dc, L"Ctrl+Shift+F8   Open guide recorder\nCtrl+Shift+F9   Next approach / target\nCtrl+Shift+F10  Cycle display mode\nCtrl+Shift+F11  Next tracked quest\nCtrl+Shift+F12  Next details page", -1, &footer, DT_LEFT);
+        DrawTextW(dc, L"Ctrl+Shift+F7   Record waypoint\nCtrl+Shift+F8   Open guide recorder\nCtrl+Shift+F9   Next approach / target\nCtrl+Shift+F10  Cycle display mode\nCtrl+Shift+F11  Next tracked quest\nCtrl+Shift+F12  Next details page", -1, &footer, DT_LEFT);
         SelectObject(dc, old);
         if(buffered) {
             BitBlt(paintDc,0,0,bounds.right,bounds.bottom,buffer,0,0,SRCCOPY);
@@ -1365,6 +1369,7 @@ DWORD WINAPI Run(void*) {
     if (!RegisterHotKey(hwnd, 3, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F12)) Log("Details page hotkey unavailable.");
     if (!RegisterHotKey(hwnd, 4, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F9)) Log("Target cycling hotkey unavailable.");
     if (!RegisterHotKey(hwnd, 5, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F8)) Log("Recorder hotkey unavailable.");
+    if (!RegisterHotKey(hwnd, 6, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F7)) Log("Waypoint hotkey unavailable.");
     if (!SetTimer(hwnd, 1, 16, nullptr)) { Log("Window timer failed."); DestroyWindow(hwnd); }
     Log("Overlay window ready.");
     MSG msg; while (GetMessageW(&msg, nullptr, 0, 0) > 0) { if (!recorderWindow || !IsWindowVisible(recorderWindow) || !IsDialogMessageW(recorderWindow, &msg)) { TranslateMessage(&msg); DispatchMessageW(&msg); } }

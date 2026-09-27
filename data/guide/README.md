@@ -6,6 +6,11 @@ the overlay's selected tracked quest; press **Ctrl+Shift+F11** to change quests.
 The game remains authoritative for quest progress. Guide edits do not change
 quest completion or game saves.
 
+For a quick waypoint on the active unfinished objective, leave the Recorder
+closed and press **Ctrl+Shift+F7** while standing at the location. This saves
+the current character position immediately as a recorded approach. Use
+**Ctrl+Shift+F9** to change the active objective first if needed.
+
 ## Record and reuse locations
 
 1. Stand at the place you want to record and open the Recorder. Your position
