@@ -8,24 +8,31 @@ quest completion or game saves.
 
 For a quick waypoint on the active unfinished objective, leave the Recorder
 closed and press **Ctrl+Shift+F7** while standing at the location. This saves
-the current character position immediately as a recorded approach. Use
+the current character position immediately as a recorded approach, creating
+an objective mapping if needed. A centered **LOCATION CAPTURED** notice fades
+over two seconds after a successful save. Use
 **Ctrl+Shift+F9** to change the active objective first if needed.
 
 ## Record and reuse locations
 
 1. Stand at the place you want to record and open the Recorder. Your position
    is captured when the window opens.
-2. Choose an unfinished objective. Enter an optional location name and press
-   **Record location**.
+2. Choose an objective. Finished objectives appear with **(FINISHED)** after
+   their names. Enter an optional location name and press **Record location**.
 3. Close and reopen the Recorder after moving to capture another position.
    Linked waypoints appear in travel order. Select one and use the move buttons
    to change that order.
 
+You can record a location for a finished objective while its quest remains
+selected and tracked. The location is saved for a future playthrough; the
+current character's completed objective stays complete and receives no bearing.
+
 Select a saved location under **Other saved locations** and press **Use for
 objective** to reuse it. **Unlink from objective** removes only that link.
 Renaming, replacing, or deleting a location everywhere affects every objective
-that uses it. **Undo last change** reverses the latest edit. **Reload guide**
-rereads saved files without restarting the game.
+that uses it. **Undo last change** reverses edits made since the guide was loaded;
+it does not restore an old backup after a restart or **Reload guide**. **Reload
+guide** rereads saved files without restarting the game.
 
 For an interior destination, record an entrance approach first. After entering,
 reopen the Recorder to capture an interior waypoint. The compass waits until
@@ -57,7 +64,7 @@ provide obstacle-aware pathfinding.
 | `defaults.json` | Baseline guide definitions; the Recorder does not edit it |
 | `personal.json` | Public recorded locations, links, and overrides |
 | `quest-entities.json` | Quest character choices shown by the Recorder |
-| `personal.json.bak` | Local recovery copy of the previous personal guide |
+| `personal.json.bak` | Local recovery copy of the previous personal guide; inspect it before restoring manually |
 | `active-selection.json` | Local selected quest and objective |
 | `observed-connections.json` | Local, unreviewed crossing proposals |
 

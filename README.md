@@ -121,9 +121,12 @@ nearby recorded secret. Cyan marks a nearby shrine/totem.
 
 To quickly add a waypoint for the active objective, stand at the location and
 press **Ctrl+Shift+F7** with the Recorder closed. It captures the current
-position and saves immediately. To choose a different unfinished objective or
-name the location, open the Guide Recorder and press **Record location**. The
-Recorder captures the position when it opens; close and reopen it after moving.
+position and saves immediately, even when that objective has no guide entry yet.
+A centered **LOCATION CAPTURED** notice fades out over two seconds. To choose
+another objective, including one already finished, or name the location, open
+the Guide Recorder and press **Record location**. Finished objectives are marked
+**(FINISHED)**; saving a location for one does not change its completion state.
+The Recorder captures the position when it opens; close and reopen it after moving.
 You can link an
 existing location, reorder linked waypoints, undo a change, and reload the guide
 without rebuilding. Outdoor crossing proposals require review before they are

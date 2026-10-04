@@ -73,6 +73,33 @@ bool observedConnectionsDirty=false;
 volatile LONG enabled = 1;
 enum class DisplayMode { TriangleOnly, TriangleAndPanel, Hidden };
 DisplayMode displayMode = DisplayMode::TriangleOnly; // Window thread only.
+HWND captureNoticeWindow = nullptr;
+ULONGLONG captureNoticeStart = 0;
+constexpr ULONGLONG CaptureNoticeDuration = 2000;
+constexpr int CaptureNoticeWidth = 380, CaptureNoticeHeight = 84;
+BYTE CaptureNoticeAlpha(ULONGLONG elapsed) {
+    if(elapsed>=CaptureNoticeDuration) return 0;
+    return static_cast<BYTE>(245*(CaptureNoticeDuration-elapsed)/CaptureNoticeDuration);
+}
+void StartCaptureNotice() {captureNoticeStart=GetTickCount64();}
+LRESULT CALLBACK CaptureNoticeProc(HWND hwnd,UINT msg,WPARAM w,LPARAM l) {
+    if(msg==WM_NCHITTEST) return HTTRANSPARENT;
+    if(msg==WM_MOUSEACTIVATE) return MA_NOACTIVATE;
+    if(msg==WM_ERASEBKGND) return 1;
+    if(msg==WM_PAINT) {
+        PAINTSTRUCT ps{};HDC dc=BeginPaint(hwnd,&ps);
+        RECT bounds{};GetClientRect(hwnd,&bounds);
+        HBRUSH background=CreateSolidBrush(RGB(19,24,27));FillRect(dc,&bounds,background);DeleteObject(background);
+        SetBkMode(dc,TRANSPARENT);SetTextColor(dc,RGB(229,211,161));
+        HFONT noticeFont=CreateFontW(-29,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,L"Segoe UI");
+        HGDIOBJ previous=SelectObject(dc,noticeFont);
+        DrawTextW(dc,L"LOCATION CAPTURED",-1,&bounds,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+        SelectObject(dc,previous);DeleteObject(noticeFont);
+        EndPaint(hwnd,&ps);return 0;
+    }
+    return DefWindowProcW(hwnd,msg,w,l);
+}
 DisplayMode NextDisplayMode(DisplayMode mode) {
     return mode == DisplayMode::TriangleOnly ? DisplayMode::TriangleAndPanel :
         mode == DisplayMode::TriangleAndPanel ? DisplayMode::Hidden : DisplayMode::TriangleOnly;
@@ -1122,10 +1149,23 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
         DWORD pid = 0;
         GetWindowThreadProcessId(foreground, &pid);
         if (pid != GetCurrentProcessId() || foreground == hwnd || foreground == orbitWindow || foreground == recorderWindow || IsIconic(foreground)) {
-            ShowWindow(hwnd, SW_HIDE); if (orbitWindow) ShowWindow(orbitWindow, SW_HIDE); return 0;
+            ShowWindow(hwnd, SW_HIDE); if (orbitWindow) ShowWindow(orbitWindow, SW_HIDE);
+            if(captureNoticeWindow) ShowWindow(captureNoticeWindow,SW_HIDE);
+            return 0;
         }
         RECT client{}; POINT origin{};
         if (GetClientRect(foreground, &client) && ClientToScreen(foreground, &origin)) {
+            if(captureNoticeWindow && captureNoticeStart) {
+                ULONGLONG elapsed=GetTickCount64()-captureNoticeStart;
+                BYTE alpha=CaptureNoticeAlpha(elapsed);
+                if(alpha) {
+                    SetLayeredWindowAttributes(captureNoticeWindow,0,alpha,LWA_ALPHA);
+                    SetWindowPos(captureNoticeWindow,HWND_TOPMOST,
+                        origin.x+(client.right-CaptureNoticeWidth)/2,
+                        origin.y+(client.bottom-CaptureNoticeHeight)/2,
+                        CaptureNoticeWidth,CaptureNoticeHeight,SWP_NOACTIVATE|SWP_SHOWWINDOW);
+                } else {captureNoticeStart=0;ShowWindow(captureNoticeWindow,SW_HIDE);}
+            }
             Sample s = Snapshot();
             unsigned rows = s.quests.valid && s.quests.count ? s.quests.count : 1;
             if (rows > VisibleQuestRows) rows = VisibleQuestRows;
@@ -1151,6 +1191,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
         } else {
             ShowWindow(hwnd, SW_HIDE);
             if (orbitWindow) ShowWindow(orbitWindow, SW_HIDE);
+            if (captureNoticeWindow) ShowWindow(captureNoticeWindow, SW_HIDE);
         }
         InvalidateRect(hwnd, nullptr, FALSE);
         // A low-frequency diagnostic record permits validation without reading
@@ -1321,7 +1362,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
         if(buffer) DeleteDC(buffer);
         EndPaint(hwnd, &ps); return 0;
     }
-    case WM_DESTROY: if (orbitWindow) { DestroyWindow(orbitWindow); orbitWindow=nullptr; } UnregisterHotKey(hwnd, 1); UnregisterHotKey(hwnd, 2); UnregisterHotKey(hwnd, 3); UnregisterHotKey(hwnd, 4); UnregisterHotKey(hwnd, 5); PostQuitMessage(0); return 0;
+    case WM_DESTROY:
+        if(orbitWindow) {DestroyWindow(orbitWindow);orbitWindow=nullptr;}
+        if(captureNoticeWindow) {DestroyWindow(captureNoticeWindow);captureNoticeWindow=nullptr;}
+        for(int id=1;id<=6;++id) UnregisterHotKey(hwnd,id);
+        PostQuitMessage(0);return 0;
     }
     return DefWindowProcW(hwnd, msg, w, l);
 }
@@ -1364,6 +1409,14 @@ DWORD WINAPI Run(void*) {
         orbitClass.lpszClassName, L"Grim Dawn Objective", WS_POPUP, 0, 0, OrbitWindowSize, OrbitWindowSize, nullptr, nullptr, module, nullptr);
     if (orbitWindow) SetLayeredWindowAttributes(orbitWindow, RGB(0,0,0), 255, LWA_COLORKEY);
     else Log("Orbit window creation failed; F10 still opens the panel.");
+    WNDCLASSW noticeClass{};noticeClass.lpfnWndProc=CaptureNoticeProc;noticeClass.hInstance=module;
+    noticeClass.lpszClassName=L"GDLocationCapturedNotice";
+    if(RegisterClassW(&noticeClass)) captureNoticeWindow=CreateWindowExW(
+        WS_EX_TOPMOST|WS_EX_TOOLWINDOW|WS_EX_NOACTIVATE|WS_EX_LAYERED|WS_EX_TRANSPARENT,
+        noticeClass.lpszClassName,L"Location captured",WS_POPUP,0,0,CaptureNoticeWidth,CaptureNoticeHeight,
+        nullptr,nullptr,module,nullptr);
+    if(captureNoticeWindow) SetLayeredWindowAttributes(captureNoticeWindow,0,0,LWA_ALPHA);
+    else Log("Location capture notice window unavailable.");
     if (!RegisterHotKey(hwnd, 1, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F10)) Log("Toggle hotkey unavailable; exit game to stop.");
     if (!RegisterHotKey(hwnd, 2, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F11)) Log("Active quest hotkey unavailable.");
     if (!RegisterHotKey(hwnd, 3, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, VK_F12)) Log("Details page hotkey unavailable.");

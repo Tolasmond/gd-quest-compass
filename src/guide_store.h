@@ -127,18 +127,39 @@ inline std::vector<Value> undo;
 inline std::string status="Guide not loaded";
 inline void publish(std::shared_ptr<const Guide> g) { std::atomic_store(&published,std::move(g)); }
 inline bool reload() { try { auto b=readFile(guideDirectory+L"/defaults.json"); Value p=emptyDocument(); auto file=guideDirectory+L"/personal.json"; if(GetFileAttributesW(file.c_str())!=INVALID_FILE_ATTRIBUTES) p=readFile(file); auto g=compile(b,p); defaults=std::move(b);personal=std::move(p);undo.clear();status=g->diagnostics.empty()?"Guide loaded":g->diagnostics;publish(g);return true; } catch(const std::exception& e){status=std::string("Reload failed; previous guide retained: ")+e.what();return false;} }
+struct WriteLock {
+    HANDLE handle=INVALID_HANDLE_VALUE;
+    WriteLock() {
+        auto path=guideDirectory+L"/personal.json.lock";
+        handle=CreateFileW(path.c_str(),GENERIC_WRITE,0,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL|FILE_FLAG_DELETE_ON_CLOSE,nullptr);
+        if(handle==INVALID_HANDLE_VALUE) throw std::runtime_error("Guide is being saved elsewhere; retry after it finishes");
+    }
+    ~WriteLock() { CloseHandle(handle); }
+    WriteLock(const WriteLock&)=delete;
+    WriteLock& operator=(const WriteLock&)=delete;
+};
 inline void safeWrite(const Value& document) {
     auto bytes=guidejson::dump(document)+"\n"; guidejson::parse(bytes);
-    auto path=guideDirectory+L"/personal.json", temp=path+L".tmp", backup=path+L".bak";
+    auto path=guideDirectory+L"/personal.json", temp=path+L".tmp", backup=path+L".bak", backupTemp=backup+L".tmp";
     HANDLE f=CreateFileW(temp.c_str(),GENERIC_WRITE,0,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr); if(f==INVALID_HANDLE_VALUE) throw std::runtime_error("Cannot create temporary guide"); DWORD written=0;
     bool ok=WriteFile(f,bytes.data(),static_cast<DWORD>(bytes.size()),&written,nullptr)&&written==bytes.size()&&FlushFileBuffers(f); CloseHandle(f);
     if(!ok) { DeleteFileW(temp.c_str()); throw std::runtime_error("Guide write failed; previous file retained"); }
-    if(GetFileAttributesW(path.c_str())!=INVALID_FILE_ATTRIBUTES) ok=ReplaceFileW(path.c_str(),temp.c_str(),backup.c_str(),0,nullptr,nullptr)!=FALSE;
-    else ok=MoveFileExW(temp.c_str(),path.c_str(),MOVEFILE_WRITE_THROUGH)!=FALSE;
-    if(!ok) { DeleteFileW(temp.c_str());throw std::runtime_error("Guide replacement failed; previous file retained"); }
+    if(GetFileAttributesW(path.c_str())!=INVALID_FILE_ATTRIBUTES) {
+        ok=CopyFileW(path.c_str(),backupTemp.c_str(),FALSE)!=FALSE;
+        if(ok) {
+            HANDLE b=CreateFileW(backupTemp.c_str(),GENERIC_WRITE,0,nullptr,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,nullptr);
+            ok=b!=INVALID_HANDLE_VALUE;
+            if(ok) {ok=FlushFileBuffers(b)!=FALSE;CloseHandle(b);}
+        }
+        if(ok) ok=MoveFileExW(backupTemp.c_str(),backup.c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH)!=FALSE;
+        if(!ok) {DeleteFileW(backupTemp.c_str());DeleteFileW(temp.c_str());throw std::runtime_error("Guide backup failed; previous file retained");}
+    }
+    if(!MoveFileExW(temp.c_str(),path.c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH)) {
+        DeleteFileW(temp.c_str());throw std::runtime_error("Guide replacement failed; previous file retained");
+    }
 }
-inline bool commit(const Value& next,bool remember=true) { try { auto g=compile(defaults,next); if(!g->diagnostics.empty()) throw std::runtime_error(g->diagnostics); auto file=guideDirectory+L"/personal.json"; if(GetFileAttributesW(file.c_str())!=INVALID_FILE_ATTRIBUTES && guidejson::dump(readFile(file))!=guidejson::dump(personal)) throw std::runtime_error("Personal guide changed on disk; reload before saving"); safeWrite(next); if(remember) {undo.push_back(personal);if(undo.size()>20)undo.erase(undo.begin());} personal=next;publish(g);status="Saved; guidance updated";return true; } catch(const std::exception& e) {status=std::string("Not saved: ")+e.what();return false;} }
-inline bool undoLast() { if(undo.empty()){try{auto backup=readFile(guideDirectory+L"/personal.json.bak");if(!commit(backup))return false;status="Restored saved backup";return true;}catch(const std::exception&){status="No saved change to undo";return false;}} auto previous=undo.back();if(!commit(previous,false))return false;undo.pop_back();status="Last change undone";return true; }
+inline bool commit(const Value& next,bool remember=true) { try { auto g=compile(defaults,next); if(!g->diagnostics.empty()) throw std::runtime_error(g->diagnostics); WriteLock lock; auto file=guideDirectory+L"/personal.json"; if(GetFileAttributesW(file.c_str())!=INVALID_FILE_ATTRIBUTES && guidejson::dump(readFile(file))!=guidejson::dump(personal)) throw std::runtime_error("Personal guide changed on disk; reload before saving"); safeWrite(next); if(remember) {undo.push_back(personal);if(undo.size()>20)undo.erase(undo.begin());} personal=next;publish(g);status="Saved; guidance updated";return true; } catch(const std::exception& e) {status=std::string("Not saved: ")+e.what();return false;} }
+inline bool undoLast() { if(undo.empty()){status="No change to undo in this session; backup is for recovery only";return false;} auto previous=undo.back();if(!commit(previous,false))return false;undo.pop_back();status="Last change undone";return true; }
 inline std::string newId(const char* prefix) { static unsigned sequence=0; FILETIME t;GetSystemTimeAsFileTime(&t);return std::string(prefix)+"-"+std::to_string((static_cast<unsigned long long>(t.dwHighDateTime)<<32)|t.dwLowDateTime)+"-"+std::to_string(++sequence); }
 inline Value provenance(const char* kind) { Value p=Value::dict();p["kind"]=kind;p["source"]="in-game recorder";p["game_build"]="24825149";p["coordinate_frame"]="game world XYZ";p["verification"]="user-recorded; not a verified spawn";p["recorded_utc_filetime"]=newId("time");return p; }
 }

@@ -401,21 +401,34 @@ void UpdateSecretRadiusControl() {
     } catch(const std::exception&) {}
     EnableWindow(RecControl(214),secret);
 }
+bool RecorderObjectiveFinished(const DetailRow& row) {
+    return row.kind==DetailKind::Objective &&
+        (row.taskState==3 || (row.taskState==2 && row.objectiveState==1));
+}
+bool RecorderObjectiveSelectable(const DetailRow& row) {
+    return row.kind==DetailKind::Objective &&
+        ((row.taskState==2 && row.objectiveState==2) || RecorderObjectiveFinished(row));
+}
 DetailRow SelectedRecordingObjective() {
-    auto i=SendMessageW(RecControl(RecObjectives),CB_GETCURSEL,0,0);if(i<0||static_cast<size_t>(i)>=recordingObjectives.size())throw std::runtime_error("Select an unfinished objective");
+    auto i=SendMessageW(RecControl(RecObjectives),CB_GETCURSEL,0,0);if(i<0||static_cast<size_t>(i)>=recordingObjectives.size())throw std::runtime_error("Select a quest objective");
     // Captured when opened in the game; never read live game objects here.
     auto row=recordingObjectives[i]; Sample current=Snapshot();
     if(QuestsLive(current)) {
-        bool stillUnfinished=false;
-        for(const auto& q:current.quests.rows) if(q.id==recordingQuest.id&&q.detailsValid&&q.details)
+        for(const auto& q:current.quests.rows) if(q.id==recordingQuest.id&&
+            !wcscmp(q.name,recordingQuest.name)&&q.detailsValid&&q.details)
             for(const auto& d:*q.details) if(d.kind==DetailKind::Objective&&d.taskUid==row.taskUid&&
-                d.objectiveUid==row.objectiveUid&&d.taskState==2&&d.objectiveState==2) stillUnfinished=true;
-        if(!stillUnfinished) throw std::runtime_error("Objective changed; close and reopen the recorder");
+                d.objectiveUid==row.objectiveUid&&RecorderObjectiveSelectable(d)) return d;
+        throw std::runtime_error("Objective changed; close and reopen the recorder");
     }
     return row;
 }
 std::string RecorderName(const char* fallback) { wchar_t name[256]{};GetWindowTextW(RecControl(RecName),name,256);return *name?guides::narrow(name):fallback; }
 std::wstring ObjectiveLabel(const DetailRow& row) { std::wstring text(row.text); auto prefix=text.find(L"]: "); if(prefix!=std::wstring::npos)text=text.substr(prefix+3); if(text.size()>240){text.resize(240);if(text.back()>=0xD800&&text.back()<=0xDBFF)text.pop_back();}return text; }
+std::wstring RecorderObjectiveLabel(const DetailRow& row) {
+    auto label=ObjectiveLabel(row);
+    if(RecorderObjectiveFinished(row)) label+=L" (FINISHED)";
+    return label;
+}
 void LoadQuestEntityChoices() {
     recorderQuestEntities.clear();recorderQuestPath.clear();recorderCatalogHash.clear();recorderEntityError.clear();
     if(!recordingQuest.id) return;
@@ -498,12 +511,12 @@ bool RecordObjectiveWaypoint(const Sample& captured,const QuestRow& quest,const 
     auto location=guides::recordLocation(next,CapturedLocation(captured,name));
     BindRecording(next,target,location);
     if(!guides::commit(next)) return false;
-    if(hasActiveQuest && activeQuest.id==quest.id) {
+    if(hasActiveQuest && activeQuest.id==quest.id && !RecorderObjectiveFinished(row)) {
         recordedQuest=quest.id;recordedTarget=target;recordedLocation=location;
     }
     return true;
 }
-void RecordActiveObjectiveWaypoint() {
+bool RecordActiveObjectiveWaypoint() {
     try {
         Sample captured=Snapshot();ULONGLONG now=GetTickCount64();
         if(!QuestsLive(captured) || !captured.zoneTime || now-captured.zoneTime>1000 || !*captured.zoneTag ||
@@ -512,20 +525,29 @@ void RecordActiveObjectiveWaypoint() {
         int questIndex=ReconcileSelection(captured);
         if(questIndex<0) throw std::runtime_error("No active tracked quest for waypoint");
         const auto& quest=captured.quests.rows[questIndex];
-        int targetIndex=ChooseTarget(captured,quest,now);
-        if(targetIndex<0 || static_cast<size_t>(targetIndex)>=captured.guide->targets.size())
-            throw std::runtime_error("No active unfinished objective for waypoint");
-        const auto& target=captured.guide->targets[targetIndex];
         if(!quest.detailsValid || !quest.details) throw std::runtime_error("Active objective details unavailable");
-        for(const auto& row:*quest.details) if(row.kind==DetailKind::Objective && row.taskState==2 &&
-            row.objectiveState==2 && row.taskUid==target.taskUid && row.objectiveUid==target.objectiveUid) {
-            if(RecordObjectiveWaypoint(captured,quest,row,"Recorded approach"))
-                Log("Waypoint saved for active quest objective; guidance updated.");
-            else Log(guides::status.c_str());
-            return;
+        int targetIndex=ChooseTarget(captured,quest,now);
+        const DetailRow* chosen=nullptr;
+        if(targetIndex>=0 && static_cast<size_t>(targetIndex)<captured.guide->targets.size()) {
+            const auto& target=captured.guide->targets[targetIndex];
+            for(const auto& row:*quest.details) if(row.kind==DetailKind::Objective && row.taskState==2 &&
+                row.objectiveState==2 && row.taskUid==target.taskUid && row.objectiveUid==target.objectiveUid) {
+                chosen=&row;break;
+            }
         }
-        throw std::runtime_error("Active objective is no longer unfinished");
+        // A newly encountered quest may have no guide mapping yet. Follow the
+        // Recorder's default: the first objective whose live task is active.
+        if(!chosen) for(const auto& row:*quest.details) if(row.kind==DetailKind::Objective &&
+            row.taskState==2 && row.objectiveState==2) {chosen=&row;break;}
+        if(!chosen) throw std::runtime_error("No active unfinished objective for waypoint");
+        if(RecordObjectiveWaypoint(captured,quest,*chosen,"Recorded approach")) {
+                StartCaptureNotice();
+                Log("Waypoint saved for active quest objective; guidance updated.");
+                return true;
+        }
+        Log(guides::status.c_str());
     } catch(const std::exception& e) {Log(e.what());}
+    return false;
 }
 void RecordActiveObjectiveHotkey() {
     if(recorderWindow && IsWindowVisible(recorderWindow)) return;
@@ -682,7 +704,9 @@ void RecorderAction(int action) {
             else if(action==201) {
                 if(!recordingPositionValid) throw std::runtime_error("No fresh captured position; close and reopen in the game");
                 if(RecordObjectiveWaypoint(recordingSample,recordingQuest,row,RecorderName("Recorded approach"))) {
-                    FillRecorderLocations();RecorderStatus("Saved; recorded position selected for quest guidance.");
+                    FillRecorderLocations();RecorderStatus(RecorderObjectiveFinished(row)?
+                        "Saved for future playthroughs; this objective remains finished.":
+                        "Saved; recorded position selected for quest guidance.");
                 } else RecorderStatus(guides::status);
                 return;
             } else throw std::runtime_error("Unknown recorder action");
@@ -764,7 +788,8 @@ void OpenRecorder() {
     recordingPositionValid=s.valid&&s.time&&now-s.time<=1000&&s.zoneTime&&now-s.zoneTime<=1000&&*s.zoneTag&&std::isfinite(s.x)&&std::isfinite(s.y)&&std::isfinite(s.z);
     bool captureValid=index>=0&&recordingPositionValid;
     recordingSample=s;recordingQuest=captureValid?s.quests.rows[index]:QuestRow{};recordingObjectives.clear();
-    if(recordingQuest.detailsValid&&recordingQuest.details)for(const auto& r:*recordingQuest.details)if(r.kind==DetailKind::Objective&&r.taskState==2&&r.objectiveState==2)recordingObjectives.push_back(r);
+    if(recordingQuest.detailsValid&&recordingQuest.details)for(const auto& r:*recordingQuest.details)
+        if(RecorderObjectiveSelectable(r)) recordingObjectives.push_back(r);
     if(!recorderWindow) {
         WNDCLASSW cls{};cls.lpfnWndProc=RecorderProc;cls.hInstance=module;cls.lpszClassName=L"GDGuideRecorder";cls.hCursor=LoadCursor(nullptr,IDC_ARROW);cls.hbrBackground=nullptr;RegisterClassW(&cls);
         recorderWindow=CreateWindowExW(WS_EX_TOPMOST,cls.lpszClassName,L"Guide recorder",WS_OVERLAPPED|WS_CAPTION|WS_SYSMENU,150,40,780,990,nullptr,nullptr,module,nullptr);
@@ -778,7 +803,7 @@ void OpenRecorder() {
             SendMessageW(c,WM_SETFONT,reinterpret_cast<WPARAM>(recorderBodyFont),TRUE);ThemeNativeRecorderControl(c);return c;
         };
         HWND header=control(L"STATIC",L"",107,16,12,730,45);SendMessageW(header,WM_SETFONT,reinterpret_cast<WPARAM>(recorderHeaderFont),TRUE);
-        HWND objectiveHeading=control(L"STATIC",L"UNFINISHED OBJECTIVE",0,16,62,260,22);SendMessageW(objectiveHeading,WM_SETFONT,reinterpret_cast<WPARAM>(recorderHeadingFont),TRUE);
+        HWND objectiveHeading=control(L"STATIC",L"QUEST OBJECTIVE",0,16,62,260,22);SendMessageW(objectiveHeading,WM_SETFONT,reinterpret_cast<WPARAM>(recorderHeadingFont),TRUE);
         control(L"COMBOBOX",L"",RecObjectives,16,86,730,220,CBS_DROPDOWNLIST|WS_VSCROLL|WS_TABSTOP);
         SendMessageW(RecControl(RecObjectives),CB_SETITEMHEIGHT,static_cast<WPARAM>(-1),25);SendMessageW(RecControl(RecObjectives),CB_SETITEMHEIGHT,0,23);
         control(L"STATIC",L"Optional location name",0,16,122,180,22);control(L"EDIT",L"",RecName,200,118,546,26,WS_BORDER|ES_AUTOHSCROLL|WS_TABSTOP);
@@ -837,15 +862,19 @@ void OpenRecorder() {
     }
     UpdateRecorderHeader();RefreshArrowChecks();
     // Match the compass selection by quest/task/objective IDs, including after
-    // guide reloads. Unmapped quests retain the first unfinished-row default.
+    // guide reloads. Unmapped quests prefer the first unfinished objective.
     ReconcileGuide(s.guide);
-    size_t objectiveSelection=0;
+    int objectiveSelection=-1,firstUnfinished=-1,firstFinished=-1;
     SendMessageW(RecControl(RecObjectives),CB_RESETCONTENT,0,0);
     for(size_t i=0;i<recordingObjectives.size();++i) {
         const auto& row=recordingObjectives[i];
-        SendMessageW(RecControl(RecObjectives),CB_ADDSTRING,0,reinterpret_cast<LPARAM>(ObjectiveLabel(row).c_str()));
-        if(IsSelectedObjective(*s.guide,recordingQuest,row)) objectiveSelection=i;
+        auto label=RecorderObjectiveLabel(row);
+        SendMessageW(RecControl(RecObjectives),CB_ADDSTRING,0,reinterpret_cast<LPARAM>(label.c_str()));
+        if(RecorderObjectiveFinished(row)) {if(firstFinished<0) firstFinished=static_cast<int>(i);}
+        else if(firstUnfinished<0) firstUnfinished=static_cast<int>(i);
+        if(IsSelectedObjective(*s.guide,recordingQuest,row)) objectiveSelection=static_cast<int>(i);
     }
+    if(objectiveSelection<0) objectiveSelection=firstUnfinished>=0?firstUnfinished:firstFinished;
     SendMessageW(RecControl(RecObjectives),CB_SETCURSEL,objectiveSelection,0);
     LoadQuestEntityChoices();RefreshQuestEntityChoice();
     SetWindowTextW(RecControl(RecName),L"");FillRecorderLocations();FillObservedConnections();RecorderStatus(!recordingPositionValid?"No fresh position. Close and reopen in the game to record.":!captureValid?"Position ready for secret recording; no selected quest. Secrets do not need an objective.":!recorderEntityError.empty()?recorderEntityError:guides::status.find("failed")!=std::string::npos||!std::atomic_load(&guides::published)->diagnostics.empty()?guides::status:"Capture ready. Select a quest character to enable live tracking; changes save immediately.");ShowWindow(recorderWindow,SW_SHOW);SetForegroundWindow(recorderWindow);
