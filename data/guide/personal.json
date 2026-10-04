@@ -4276,12 +4276,19 @@
       "provenance": {
         "game_build": "24825149",
         "kind": "reviewed_mapping",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8214 'Deliver Malleum Menhir to Duncan at the refugee camp' requires items from objective nodes 8213. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "sha256": "84c52567f7fd9c02d8e6aae1e93bf80881eb31ab466c8ac22f6f5edda310446a",
         "source": "data/coordinate-investigation/two-blacksmiths-query.json",
         "verification": "Conversation node 10687 completes exact task 2399679232; objective 3.2 active in live log"
       },
       "quest_uid": 2606548480,
       "record": "records/creatures/npcs/questnpcs/npc_smithapprentice_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 4099427840,
+          "task_uid": 2399679232
+        }
+      ],
       "task_uid": 2399679232
     },
     {
@@ -4329,12 +4336,19 @@
       "provenance": {
         "game_build": "24825149",
         "kind": "reviewed_mapping",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8184 'Deliver the Slith Necklaces and 100 Iron Bits to Torven' requires items from objective nodes 8183. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "sha256": "0a068bcc13039e4abe2e2aa7e140f8cc1f109ed1c336c9e1a02f06cbd60b0c7e",
         "source": "data/coordinate-investigation/slith-charm-query.json",
         "verification": "Exact delivery objective names Torven; extracted turn-in entity and conversation node 10674 reviewed"
       },
       "quest_uid": 3288263936,
       "record": "records/creatures/npcs/questnpcs/npc_rovermarcellus_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2464355584,
+          "task_uid": 2153124608
+        }
+      ],
       "task_uid": 2153124608
     },
     {
@@ -4550,12 +4564,19 @@
         "coordinate_frame": "game world XYZ",
         "game_build": "24825149",
         "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Task explicitly requires enough dynamite before destroying the barricade. Graph objective node 4583, prerequisites 4582. Gate on exact live quest satisfaction.",
         "recorded_utc_filetime": "time-134347041760301420-7",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 869629312,
       "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 590423168,
+          "task_uid": 85708320
+        }
+      ],
       "task_uid": 85708320
     },
     {
@@ -4640,12 +4661,19 @@
         "coordinate_frame": "game world XYZ",
         "game_build": "24825149",
         "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 4753 'Deliver the Scrap to Silas at New Harbor' requires items from objective nodes 4752. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134347054971806693-10",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 3869246976,
       "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 3401115904,
+          "task_uid": 335505344
+        }
+      ],
       "task_uid": 335505344
     },
     {
@@ -5146,12 +5174,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5202 'Bring the Remains to Master Varuuk at Sorrow's Bastion' requires items from objective nodes 5201. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134348554839798726-25",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 3709138176,
       "record": "records/creatures/npcs/questnpcs/gdareac/npc_mastervaruuk.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1990823936,
+          "task_uid": 2331363584
+        }
+      ],
       "task_uid": 2331363584
     },
     {
@@ -5236,12 +5271,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5212 'Bring the Seals of Binding to Master Varuuk at Sorrow's Bastion' requires items from objective nodes 5211. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134348761705475967-43",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 239317968,
       "record": "records/creatures/npcs/questnpcs/gdareac/npc_mastervaruuk.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3274234368,
+          "task_uid": 2127734656
+        }
+      ],
       "task_uid": 2127734656
     },
     {
@@ -5290,12 +5332,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5226 'Bring the Aetherial Essence to Master Varuuk at Sorrow's Bastion' requires items from objective nodes 5225. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134348764772040079-62",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 3938412544,
       "record": "records/creatures/npcs/questnpcs/gdareac/npc_mastervaruuk.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3703038976,
+          "task_uid": 2366160640
+        }
+      ],
       "task_uid": 2366160640
     },
     {
@@ -5406,12 +5455,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5242 'Deliver the Ashes to the Keeper of Tomes at Sorrow's Bastion' requires items from objective nodes 5241. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134349070890054588-2",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 937833216,
       "record": "records/creatures/npcs/questnpcs/gdareac/npc_keeperoftomes.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 129225056,
+          "task_uid": 3927557120
+        }
+      ],
       "task_uid": 3927557120
     },
     {
@@ -5469,12 +5525,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 individual review: Recover supplies before choosing either recipient; recipient choice remains independent. Graph objective node 5620, prerequisites 5619. Gate on exact live quest satisfaction.",
         "recorded_utc_filetime": "time-134349084475510850-25",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 3337003776,
       "record": "records/creatures/npcs/questnpcs/gdaread/npc_quartermaster_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3479151872,
+          "task_uid": 1337991936
+        }
+      ],
       "task_uid": 1337991936
     },
     {
@@ -5487,12 +5550,19 @@
         "coordinate_frame": "game world XYZ",
         "game_build": "24825149",
         "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Task uses the recovered heavy explosives to clear Fort Ikon gates. Graph objective node 5435, prerequisites 5434. Gate on exact live quest satisfaction.",
         "recorded_utc_filetime": "time-134349086793885714-34",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 697793984,
       "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 2563247104,
+          "task_uid": 1950916224
+        }
+      ],
       "task_uid": 1950916224
     },
     {
@@ -5586,12 +5656,19 @@
           "source": "data/npc-guidance/quest-graphs.json",
           "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82"
         },
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5555 'Bring the Fang to Anasteria' requires items from objective nodes 5554. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
         "recorded_utc_filetime": "time-134349140164762009-30",
         "source": "in-game recorder",
         "verification": "user-recorded; not a verified spawn"
       },
       "quest_uid": 1273887104,
       "record": "records/creatures/npcs/questnpcs/gdaread/npc_exile_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 399534016,
+          "task_uid": 4103227392
+        }
+      ],
       "task_uid": 4103227392
     },
     {
@@ -5907,6 +5984,2342 @@
       "quest_uid": 3432925952,
       "record": "",
       "task_uid": 2891520768
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Old Arkovia",
+      "id": "npc-3871337728-1112077824-3289426176",
+      "name": "Amkala",
+      "objective_uid": 3289426176,
+      "provenance": {
+        "completion_nodes": [
+          8742,
+          8745,
+          8748,
+          8751,
+          8754
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Annals to Amkala at the Rover Camp in Old Arkovia",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 4574 'Bring the Annals to Amkala at the Rover Camp in Old Arkovia' requires items from objective nodes 4573. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareab/sq_annalsofarkovia.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3871337728,
+      "record": "records/creatures/npcs/flavornpcs/homestead/npc_rover_oldarkoviacamp_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2317767168,
+          "task_uid": 1112077824
+        }
+      ],
+      "task_uid": 1112077824
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Arkovian Foothills",
+      "id": "npc-2477689344-4110661632-3320537088",
+      "name": "Greven",
+      "objective_uid": 3320537088,
+      "provenance": {
+        "completion_nodes": [
+          8456,
+          8458
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Inform Greven at the Rover Camp in the Arkovian Foothills of the elder's fate",
+        "prerequisite_review": "October 4 individual review: Field-return task explicitly delivers the collected Mathias talisman to Greven. Graph objective node 4680, prerequisites 4679. Gate on exact live quest satisfaction.",
+        "quest_path": "quests/gdareab/sq_lostelder.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2477689344,
+      "record": "records/creatures/npcs/questnpcs/gdareab/npc_greven_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3048835328,
+          "task_uid": 4110661632
+        }
+      ],
+      "task_uid": 4110661632
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Old Arkovia",
+      "id": "npc-115903432-2368830976-2779876352",
+      "name": "Eva",
+      "objective_uid": 2779876352,
+      "provenance": {
+        "completion_nodes": [
+          8421,
+          8430
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the Royal Jelly to Eva at the Rover Camp in Old Arkovia",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 4700 'Deliver the Royal Jelly to Eva at the Rover Camp in Old Arkovia' requires items from objective nodes 4699. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareab/sq_medicalpractice.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 115903432,
+      "record": "records/creatures/npcs/questnpcs/gdareab/npc_eva_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3416819968,
+          "task_uid": 2368830976
+        }
+      ],
+      "task_uid": 2368830976
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Homestead",
+      "id": "npc-437479872-2771694592-654022720",
+      "name": "Captain Somer",
+      "objective_uid": 654022720,
+      "provenance": {
+        "completion_nodes": [
+          8928
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return to Captain Somer in Homestead",
+        "prerequisite_review": "October 4 individual review: Collect Karroz tome before reporting the recovered cult information to Somer. Graph objective node 4974, prerequisites 4973. Gate on exact live quest satisfaction.",
+        "quest_path": "quests/gdareac/mq_reapingwhatyousow.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 437479872,
+      "record": "records/creatures/npcs/questnpcs/gdareac/npc_blacklegion_captain_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1975858688,
+          "task_uid": 2771694592
+        }
+      ],
+      "task_uid": 2771694592
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Homestead",
+      "id": "npc-506468640-2567592960-1999954944",
+      "name": "Scoutmaster Lysell",
+      "objective_uid": 1999954944,
+      "provenance": {
+        "completion_nodes": [
+          8951,
+          8958
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return the Insignias to Scoutmaster Lysell in Homestead",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5076 'Return the Insignias to Scoutmaster Lysell in Homestead' requires items from objective nodes 5075. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareac/sq_finalsalute.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 506468640,
+      "record": "records/creatures/npcs/questnpcs/gdareac/npc_blacklegion_scoutmasterlysell_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3204185344,
+          "task_uid": 2567592960
+        }
+      ],
+      "task_uid": 2567592960
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to The Blood Grove",
+      "id": "npc-2073167232-2946340608-3119382016",
+      "name": "Myla Finegan",
+      "objective_uid": 3119382016,
+      "provenance": {
+        "completion_nodes": [
+          9225
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the Dynamite to Myla Finegan in the Blood Grove",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5151 'Deliver the Dynamite to Myla Finegan in the Blood Grove' requires items from objective nodes 5150. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareac/sq_maninneed.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2073167232,
+      "record": "records/creatures/npcs/questnpcs/gdareac/npc_mylafinegan_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2206468864,
+          "task_uid": 2946340608
+        }
+      ],
+      "task_uid": 2946340608
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Pine Barrens",
+      "id": "npc-2404811520-2023702784-1179131136",
+      "name": "Deathmark Kadris",
+      "objective_uid": 1179131136,
+      "provenance": {
+        "completion_nodes": [
+          8824
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return the venom to Deathmark Kadris at his camp in the Pine Barrens",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5169 'Return the venom to Deathmark Kadris at his camp in the Pine Barrens' requires items from objective nodes 5168. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareac/sq_manticorevenom.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2404811520,
+      "record": "records/creatures/npcs/questnpcs/gdareac/npc_blacklegion_deathmarkkadris_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3752001536,
+          "task_uid": 2023702784
+        }
+      ],
+      "task_uid": 2023702784
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Coven's Refuge",
+      "id": "npc-2786571776-1926980608-749709760",
+      "name": "Garradia",
+      "objective_uid": 749709760,
+      "provenance": {
+        "completion_nodes": [],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Ugdenbog Fetish to Garradia at the Coven's Refuge",
+        "prerequisite_review": "October 4 individual review: Task says once the Ugdenbog Fetish is obtained from Scorv stash, return it to Garradia. Graph objective node 5657, prerequisites 5656. Gate on exact live quest satisfaction.",
+        "quest_path": "quests/gdareae/mq_barrowholmfriendly.qst",
+        "relationship": "exact recipient text + unique quest NPC record",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2786571776,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_witchgarradia_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2708606208,
+          "task_uid": 1926980608
+        }
+      ],
+      "task_uid": 1926980608
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Coven's Refuge",
+      "id": "npc-3008726784-2889666048-3421268736",
+      "name": "Garradia",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "completion_nodes": [],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Ugdenbog Fetish to Garradia at the Coven's Refuge",
+        "prerequisite_review": "October 4 individual review: Hostile Barrowholm branch requires finding cellar fetish before Garradia delivery. Graph objective node 5667, prerequisites 5666. Gate on exact live quest satisfaction.",
+        "quest_path": "quests/gdareae/mq_barrowholmhostile.qst",
+        "relationship": "exact recipient text + unique quest NPC record",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3008726784,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_witchgarradia_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2531326208,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Coven's Refuge",
+      "id": "npc-1211376256-2889666048-3171002112",
+      "name": "Garradia",
+      "objective_uid": 3171002112,
+      "provenance": {
+        "completion_nodes": [
+          12085,
+          12092,
+          12099
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Heart and Ulgrim's Keepsake to Garradia in the Coven of Ugdenbog",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5686 'Bring the Heart and Ulgrim's Keepsake to Garradia in the Coven of Ugdenbog' requires items from objective nodes 5684, 5685. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareae/mq_desperatemeasures.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1211376256,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_witchgarradia_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3421268736,
+          "task_uid": 2889666048
+        },
+        {
+          "objective_uid": 2804340224,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Coven's Refuge",
+      "id": "npc-2346767872-2889666048-3421268736",
+      "name": "Garradia",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "completion_nodes": [
+          12057,
+          12058,
+          12059
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Ugdenbog Fetish to Garradia at the Coven's Refuge",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5737 'Bring the Ugdenbog Fetish to Garradia at the Coven's Refuge' requires items from objective nodes 5736. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareae/mq_seekingulgrimpast.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2346767872,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_witchgarradia_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3324601856,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Coven's Refuge",
+      "id": "npc-3144058368-2733692160-811115264",
+      "name": "Garradia",
+      "objective_uid": 811115264,
+      "provenance": {
+        "completion_nodes": [
+          12069,
+          12076
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the materials to Garradia at the Coven's Refuge",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5802 'Bring the materials to Garradia at the Coven's Refuge' requires items from objective nodes 5799, 5800, 5801. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareae/sq_coven02.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3144058368,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_witchgarradia_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1897174016,
+          "task_uid": 2733692160
+        },
+        {
+          "objective_uid": 4261967872,
+          "task_uid": 2733692160
+        },
+        {
+          "objective_uid": 3722580224,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Barrowholm",
+      "id": "npc-4572392-352436320-2124513280",
+      "name": "Scorv Egdenor",
+      "objective_uid": 2124513280,
+      "provenance": {
+        "completion_nodes": [
+          11874,
+          11875,
+          11882,
+          11883
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Hearts to Scorv Egdenor in Barrowholm",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 5957 'Bring the Hearts to Scorv Egdenor in Barrowholm' requires items from objective nodes 5954, 5955, 5956. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareae/sq_wendigocult05.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 4572392,
+      "record": "records/creatures/npcs/questnpcs/gdareae/npc_ugdenbogscorv_ritual.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 898915456,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 2672364800,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 1963981824,
+          "task_uid": 352436320
+        }
+      ],
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-1934714752-2733692160-811115264",
+      "name": "Alain",
+      "objective_uid": 811115264,
+      "provenance": {
+        "completion_nodes": [
+          13047
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the blood to Alain at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6488 'Deliver the blood to Alain at the Conclave of the Three' requires items from objective nodes 6487. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/mq_b01_gatheringessence.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1934714752,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_bysmielquest_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1897174016,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-175737968-2889666048-3229240064",
+      "name": "Alain",
+      "objective_uid": 3229240064,
+      "provenance": {
+        "completion_nodes": [
+          13059
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring Galfang's Core to Alain at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6501 'Bring Galfang's Core to Alain at the Conclave of the Three' requires items from objective nodes 6500. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/mq_b02_gatheringpower.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 175737968,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_bysmielquest_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3709908736,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-1417371904-2733692160-811115264",
+      "name": "Raiken",
+      "objective_uid": 811115264,
+      "provenance": {
+        "completion_nodes": [
+          13533
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the eye to Raiken at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6609 'Deliver the eye to Raiken at the Conclave of the Three' requires items from objective nodes 6608. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/mq_s01_asourceofpower.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1417371904,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_solaelquest_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3722580224,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Vanguard of the Three",
+      "id": "npc-1834387200-2889666048-3421268736",
+      "name": "Sagon, Vicar of Solael",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "completion_nodes": [
+          13620,
+          13632
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the heart to Sagon at the Vanguard of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6658 'Bring the heart to Sagon at the Vanguard of the Three' requires items from objective nodes 6657. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/mq_s03_heartastribute.qst",
+        "relationship": "recipient text + exact task completion conversation (reviewed name alias)",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1834387200,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_solaelleader_02.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 556405888,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-2652673024-2733692160-811115264",
+      "name": "Kargon",
+      "objective_uid": 811115264,
+      "provenance": {
+        "completion_nodes": [
+          13479
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the tome to Kargon at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6805 'Bring the tome to Kargon at the Conclave of the Three' requires items from objective nodes 6804. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/sq_10_losttome.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2652673024,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_inventor_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1897174016,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-2108681088-2889666048-3421268736",
+      "name": "Riggs",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "completion_nodes": [
+          13394,
+          13403,
+          13417
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the Iris to Riggs at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6851 'Deliver the Iris to Riggs at the Conclave of the Three' requires items from objective nodes 6850. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/sq_13_riggsquest_01.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 2108681088,
+      "record": "records/creatures/npcs/flavornpcs/gdareag/npc_dreegflavor_02.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1316166272,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-42281352-2733692160-1897174016",
+      "name": "Alain",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "completion_nodes": [
+          13031,
+          13034
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the relic to Alain at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6866 'Deliver the relic to Alain at the Conclave of the Three' requires items from objective nodes 6865. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/sq_bysmiel_01.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 42281352,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_bysmielquest_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1749670144,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Conclave of the Three",
+      "id": "npc-1284530304-352436320-2124513280",
+      "name": "Raiken",
+      "objective_uid": 2124513280,
+      "provenance": {
+        "completion_nodes": [
+          13511
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return the fragments to Raiken at the Conclave of the Three",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 6972 'Return the fragments to Raiken at the Conclave of the Three' requires items from objective nodes 6969, 6970, 6971. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareag/sq_solael_01.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1284530304,
+      "record": "records/creatures/npcs/questnpcs/gdareag/npc_solaelquest_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1552425984,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 3992673536,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 295218944,
+          "task_uid": 352436320
+        }
+      ],
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Kurnhold",
+      "id": "npc-3010828800-2733692160-811115264",
+      "name": "Koryn Earthurn",
+      "objective_uid": 811115264,
+      "provenance": {
+        "completion_nodes": [
+          15078
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the essence to Koryn Earthurn in Kurnhold",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7090 'Deliver the essence to Koryn Earthurn in Kurnhold' requires items from objective nodes 7088, 7089. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/mq_06a_ugdenbog.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3010828800,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_kurndruid_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1897174016,
+          "task_uid": 2733692160
+        },
+        {
+          "objective_uid": 3274061312,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Kurnhold",
+      "id": "npc-3359036160-2889666048-3229240064",
+      "name": "Talgir the Druid",
+      "objective_uid": 3229240064,
+      "provenance": {
+        "completion_nodes": [
+          15116
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the embers to Talgir the Druid in Kurnhold",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7104 'Bring the embers to Talgir the Druid in Kurnhold' requires items from objective nodes 7103. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/mq_06b_korvan.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3359036160,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_kurndruid_02.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3709908736,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Kurnhold",
+      "id": "npc-3643713280-2889666048-3421268736",
+      "name": "Witra of the Storm Spears",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "completion_nodes": [
+          14353
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the heart to Witra of the Storm Spears in Kurnhold",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7121 'Bring the heart to Witra of the Storm Spears in Kurnhold' requires items from objective nodes 7120. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/mq_06c_void.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3643713280,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_kurndruid_03.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1768189824,
+          "task_uid": 2889666048
+        }
+      ],
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Kurnhold",
+      "id": "npc-1385552640-2733692160-1897174016",
+      "name": "Horth of the Bloodragers",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "completion_nodes": [
+          14634
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring Blackheart's heart to Bloodrager Horth at Kurnhold",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7247 'Bring Blackheart's heart to Bloodrager Horth at Kurnhold' requires items from objective nodes 7246. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/sq_03_blackheart.qst",
+        "relationship": "recipient text + exact task completion conversation (reviewed name alias)",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1385552640,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_bloodragerhorth_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 844492736,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Frostveil Highlands",
+      "id": "npc-1247696768-2733692160-3383175680",
+      "name": "Thane Sulf Hinterland",
+      "objective_uid": 3383175680,
+      "provenance": {
+        "completion_nodes": [
+          14266
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the meat to Thane Sulf Hinterland in the Frostveil Highlands",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7333 'Bring the meat to Thane Sulf Hinterland in the Frostveil Highlands' requires items from objective nodes 7332. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/sq_08_thecamp.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1247696768,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_kurncamp_hunter_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1897174016,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Frostveil Highlands",
+      "id": "npc-1391128448-2733692160-3383175680",
+      "name": "Aelin",
+      "objective_uid": 3383175680,
+      "provenance": {
+        "completion_nodes": [
+          14603
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the feathers to Aelin in the Frostveil Highlands",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7354 'Deliver the feathers to Aelin in the Frostveil Highlands' requires items from objective nodes 7353. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/sq_10_feathersofabird.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1391128448,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_kurnscout_aela_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1829567616,
+          "task_uid": 2733692160
+        }
+      ],
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Kurnhold",
+      "id": "npc-1242956416-352436320-4047643136",
+      "name": "Thane Vilgar",
+      "objective_uid": 4047643136,
+      "provenance": {
+        "completion_nodes": [
+          14836,
+          14841
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Deliver the memories to Thane Vilgar at Kurnhold",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7762 'Deliver the memories to Thane Vilgar at Kurnhold' requires items from objective nodes 7758, 7759, 7760, 7761. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/gdareah/sq_kurn_01_oldwounds.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1242956416,
+      "record": "records/creatures/npcs/questnpcs/gdareah/npc_thanevilgar_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2124513280,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 3470108160,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 745749760,
+          "task_uid": 352436320
+        },
+        {
+          "objective_uid": 1102156672,
+          "task_uid": 352436320
+        }
+      ],
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-392259872-911363392-745790336",
+      "name": "Kasparov",
+      "objective_uid": 745790336,
+      "provenance": {
+        "completion_nodes": [
+          10577,
+          10590,
+          10592
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Aether Crystals to Kasparov in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7900 'Bring the Aether Crystals to Kasparov in Devil's Crossing' requires items from objective nodes 7899. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/mq_pocketportal.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 392259872,
+      "record": "records/creatures/npcs/questnpcs/npc_kasparov_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 175627840,
+          "task_uid": 911363392
+        }
+      ],
+      "task_uid": 911363392
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-858562816-3069872640-3116828928",
+      "name": "Barnabas",
+      "objective_uid": 3116828928,
+      "provenance": {
+        "completion_nodes": [
+          10177,
+          10185,
+          10188
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Scrap to Barnabas in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 7970 'Bring the Scrap to Barnabas in Devil's Crossing' requires items from objective nodes 7969. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/mq_waterpump.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 858562816,
+      "record": "records/creatures/npcs/questnpcs/npc_barnabas_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1821820032,
+          "task_uid": 3069872640
+        }
+      ],
+      "task_uid": 3069872640
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-1930365568-3766062592-1265047424",
+      "name": "Kasparov",
+      "objective_uid": 1265047424,
+      "provenance": {
+        "completion_nodes": [
+          10543,
+          10557,
+          10564
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Dynamite to Kasparov in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8008 'Bring the Dynamite to Kasparov in Devil's Crossing' requires items from objective nodes 8007. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/sq_dismantling.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 1930365568,
+      "record": "records/creatures/npcs/questnpcs/npc_kasparov_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 4167013888,
+          "task_uid": 3766062592
+        }
+      ],
+      "task_uid": 3766062592
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-969015040-4015236352-3612250624",
+      "name": "Sybil Hart",
+      "objective_uid": 3612250624,
+      "provenance": {
+        "completion_nodes": [
+          10760
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return the Amulet to Sybil Hart in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8017 'Return the Amulet to Sybil Hart in Devil's Crossing' requires items from objective nodes 8016. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/sq_harts_amulet.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 969015040,
+      "record": "records/creatures/npcs/questnpcs/npc_tomhart_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1831803392,
+          "task_uid": 4015236352
+        }
+      ],
+      "task_uid": 4015236352
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-969015040-3513241344-3435694336",
+      "name": "Sybil Hart",
+      "objective_uid": 3435694336,
+      "provenance": {
+        "completion_nodes": [
+          10756
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the amulet to Sybil Hart in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8029 'Bring the amulet to Sybil Hart in Devil's Crossing' requires items from objective nodes 8028. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/sq_harts_amulet.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 969015040,
+      "record": "records/creatures/npcs/questnpcs/npc_tomhart_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 1858126976,
+          "task_uid": 3513241344
+        }
+      ],
+      "task_uid": 3513241344
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-783298048-2216366336-964901376",
+      "name": "Kasparov",
+      "objective_uid": 964901376,
+      "provenance": {
+        "completion_nodes": [
+          10504,
+          10508
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Bring the Formula to Kasparov in Devil's Crossing",
+        "prerequisite_review": "October 4 item-delivery review: graph objective node 8170 'Bring the Formula to Kasparov in Devil's Crossing' requires items from objective nodes 8169. Gate on exact live objective satisfaction, never proximity or observed death. See local objective-order audit.",
+        "quest_path": "quests/sq_slithlab.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 783298048,
+      "record": "records/creatures/npcs/questnpcs/npc_kasparov_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 2649817344,
+          "task_uid": 2216366336
+        }
+      ],
+      "task_uid": 2216366336
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134349630992886960-1",
+      "name": "Destroy the Aetherial Barrier leading north out of the Burrwitch Estates",
+      "objective_uid": 1363221888,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Task identifies Creed pendant as the means of penetrating the Aetherial barrier. Graph objective node 5680, prerequisites 5679. Gate on exact live quest satisfaction.",
+        "recorded_utc_filetime": "time-134349630992886960-2",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 1211376256,
+      "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 3101228544,
+          "task_uid": 3902529280
+        }
+      ],
+      "task_uid": 3902529280
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134349857241400689-2",
+      "name": "Perform the ritual to locate Ulgrim",
+      "objective_uid": 4010034688,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Ritual requires the bound keepsake at Altar of Rattosh. Graph objective node 5708, prerequisites 5707. Gate on exact live quest satisfaction.",
+        "recorded_utc_filetime": "time-134349857241400689-3",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 1796338688,
+      "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 3778752256,
+          "task_uid": 1286658816
+        }
+      ],
+      "task_uid": 1286658816
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134350160844557443-124",
+      "name": "Destroy the Gate to Crown Hill",
+      "objective_uid": 3585065216,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Crown Hill gate demolition requires Resistance Bomb and Creed additive; acquiring the two stays independent. Graph objective node 6123, prerequisites 6121, 6122. Gate on exact live quest satisfaction.",
+        "recorded_utc_filetime": "time-134350160844557443-125",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 4073285376,
+      "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 2847328000,
+          "task_uid": 2027399040
+        },
+        {
+          "objective_uid": 2452647680,
+          "task_uid": 2027399040
+        }
+      ],
+      "task_uid": 2027399040
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134355282226049299-24",
+      "name": "Slay the Shaper of Flesh (0/1)",
+      "objective_uid": 1580120064,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "prerequisite_review": "October 4 individual review: Guardian objective checks AREAF_FACTORYBOSS_OPENED before access to Shaper of Flesh. Graph objective node 6044, prerequisites 6043. Gate on exact live quest satisfaction.",
+        "recorded_utc_filetime": "time-134355282226049299-25",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 1034538944,
+      "record": "",
+      "requires_completed": [
+        {
+          "objective_uid": 3548735232,
+          "task_uid": 1293631872
+        }
+      ],
+      "task_uid": 1293631872
+    },
+    {
+      "enemy": false,
+      "hint": "Collect the Annals of Arkovia in Cronley's Hideout",
+      "id": "collection-3871337728-1112077824-2317767168",
+      "name": "Collect the Annals of Arkovia in Cronley's Hideout",
+      "objective_uid": 2317767168,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 4573,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3871337728,
+      "record": "",
+      "task_uid": 1112077824
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Royal Jelly from Wasp Hives",
+      "id": "collection-115903432-2368830976-3416819968",
+      "name": "Collect Royal Jelly from Wasp Hives",
+      "objective_uid": 3416819968,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 4699,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 115903432,
+      "record": "",
+      "task_uid": 2368830976
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Scrap",
+      "id": "collection-3869246976-335505344-3401115904",
+      "name": "Collect Scrap",
+      "objective_uid": 3401115904,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 4752,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3869246976,
+      "record": "",
+      "task_uid": 335505344
+    },
+    {
+      "enemy": false,
+      "hint": "Collect insignias from fallen Black Legion soldiers in the Blood Grove",
+      "id": "collection-506468640-2567592960-3204185344",
+      "name": "Collect insignias from fallen Black Legion soldiers in the Blood Grove",
+      "objective_uid": 3204185344,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5075,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 506468640,
+      "record": "",
+      "task_uid": 2567592960
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Dynamite",
+      "id": "collection-2073167232-2946340608-2206468864",
+      "name": "Gather Dynamite",
+      "objective_uid": 2206468864,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5150,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2073167232,
+      "record": "",
+      "task_uid": 2946340608
+    },
+    {
+      "enemy": false,
+      "hint": "Collect a Manticore Poison Gland from Manticore Wastestalkers in the Jagged Waste",
+      "id": "collection-2404811520-2023702784-3752001536",
+      "name": "Collect a Manticore Poison Gland from Manticore Wastestalkers in the Jagged Waste",
+      "objective_uid": 3752001536,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5168,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2404811520,
+      "record": "",
+      "task_uid": 2023702784
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Chthonic Seals of Binding",
+      "id": "collection-239317968-2127734656-3274234368",
+      "name": "Gather Chthonic Seals of Binding",
+      "objective_uid": 3274234368,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5211,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 239317968,
+      "record": "",
+      "task_uid": 2127734656
+    },
+    {
+      "enemy": false,
+      "hint": "Gather the Desecrated Ashes",
+      "id": "collection-937833216-3927557120-129225056",
+      "name": "Gather the Desecrated Ashes",
+      "objective_uid": 129225056,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5241,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 937833216,
+      "record": "",
+      "task_uid": 3927557120
+    },
+    {
+      "enemy": false,
+      "hint": "Slay Carraxus Foul and take its heart",
+      "id": "collection-1211376256-2889666048-3421268736",
+      "name": "Slay Carraxus Foul and take its heart",
+      "objective_uid": 3421268736,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5684,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1211376256,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire Ulgrim's Keepsake from Inquisitor Creed",
+      "id": "collection-1211376256-2889666048-2804340224",
+      "name": "Acquire Ulgrim's Keepsake from Inquisitor Creed",
+      "objective_uid": 2804340224,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5685,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1211376256,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire the Ugdenbog Fetish from Scorv Egdenor",
+      "id": "collection-2346767872-2889666048-3324601856",
+      "name": "Acquire the Ugdenbog Fetish from Scorv Egdenor",
+      "objective_uid": 3324601856,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5736,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2346767872,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Venomgaze Bile",
+      "id": "collection-3144058368-2733692160-1897174016",
+      "name": "Gather Venomgaze Bile",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5799,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3144058368,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Leafmane Alpha Horn",
+      "id": "collection-3144058368-2733692160-4261967872",
+      "name": "Gather Leafmane Alpha Horn",
+      "objective_uid": 4261967872,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5800,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3144058368,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Ugdenbloom",
+      "id": "collection-3144058368-2733692160-3722580224",
+      "name": "Gather Ugdenbloom",
+      "objective_uid": 3722580224,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5801,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3144058368,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Handarroth's Heart",
+      "id": "collection-4572392-352436320-898915456",
+      "name": "Collect Handarroth's Heart",
+      "objective_uid": 898915456,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5954,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 4572392,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Ollivioth's Heart",
+      "id": "collection-4572392-352436320-2672364800",
+      "name": "Collect Ollivioth's Heart",
+      "objective_uid": 2672364800,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5955,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 4572392,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Yuvoloth's Heart",
+      "id": "collection-4572392-352436320-1963981824",
+      "name": "Collect Yuvoloth's Heart",
+      "objective_uid": 1963981824,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5956,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 4572392,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Blood of the Watchers",
+      "id": "collection-1934714752-2733692160-1897174016",
+      "name": "Gather Blood of the Watchers",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6487,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1934714752,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Slay Galfang and claim its core",
+      "id": "collection-175737968-2889666048-3709908736",
+      "name": "Slay Galfang and claim its core",
+      "objective_uid": 3709908736,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6500,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 175737968,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire the Eye of Ekur",
+      "id": "collection-1417371904-2733692160-3722580224",
+      "name": "Acquire the Eye of Ekur",
+      "objective_uid": 3722580224,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6608,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1417371904,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire the Heart of Onarix",
+      "id": "collection-1834387200-2889666048-556405888",
+      "name": "Acquire the Heart of Onarix",
+      "objective_uid": 556405888,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6657,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1834387200,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Retrieve the Tome of Eanatum",
+      "id": "collection-2652673024-2733692160-1897174016",
+      "name": "Retrieve the Tome of Eanatum",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6804,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2652673024,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Claim the Iris of Eternal Night",
+      "id": "collection-2108681088-2889666048-1316166272",
+      "name": "Claim the Iris of Eternal Night",
+      "objective_uid": 1316166272,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6850,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2108681088,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the relic from the Kymon's Chosen Deserters",
+      "id": "collection-42281352-2733692160-1749670144",
+      "name": "Recover the relic from the Kymon's Chosen Deserters",
+      "objective_uid": 1749670144,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6865,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 42281352,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Collect the First Word of Rahn",
+      "id": "collection-1284530304-352436320-1552425984",
+      "name": "Collect the First Word of Rahn",
+      "objective_uid": 1552425984,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6969,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1284530304,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Collect the Second Word of Rahn",
+      "id": "collection-1284530304-352436320-3992673536",
+      "name": "Collect the Second Word of Rahn",
+      "objective_uid": 3992673536,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6970,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1284530304,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Collect the Third Word of Rahn",
+      "id": "collection-1284530304-352436320-295218944",
+      "name": "Collect the Third Word of Rahn",
+      "objective_uid": 295218944,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6971,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1284530304,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Essence of Ugdenbog",
+      "id": "collection-3010828800-2733692160-1897174016",
+      "name": "Gather Essence of Ugdenbog",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7088,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3010828800,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Gather the Essence of Bargoll",
+      "id": "collection-3010828800-2733692160-3274061312",
+      "name": "Gather the Essence of Bargoll",
+      "objective_uid": 3274061312,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7089,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3010828800,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Embers of the First Flame from the Tomb of the Eldritch Sun",
+      "id": "collection-3359036160-2889666048-3709908736",
+      "name": "Recover the Embers of the First Flame from the Tomb of the Eldritch Sun",
+      "objective_uid": 3709908736,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7103,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3359036160,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Ashen Heart of the Void from the World's Tear",
+      "id": "collection-3643713280-2889666048-1768189824",
+      "name": "Recover the Ashen Heart of the Void from the World's Tear",
+      "objective_uid": 1768189824,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7120,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3643713280,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Slay Blackheart and claim his heart as proof",
+      "id": "collection-1385552640-2733692160-844492736",
+      "name": "Slay Blackheart and claim his heart as proof",
+      "objective_uid": 844492736,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7246,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1385552640,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire a Choice Flank from Ruugru",
+      "id": "collection-1247696768-2733692160-1897174016",
+      "name": "Acquire a Choice Flank from Ruugru",
+      "objective_uid": 1897174016,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7332,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1247696768,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Gather Molted Roc Feathers",
+      "id": "collection-1391128448-2733692160-1829567616",
+      "name": "Gather Molted Roc Feathers",
+      "objective_uid": 1829567616,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7353,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1391128448,
+      "record": "",
+      "task_uid": 2733692160
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Memory of Chieftain Arukai",
+      "id": "collection-1242956416-352436320-2124513280",
+      "name": "Recover the Memory of Chieftain Arukai",
+      "objective_uid": 2124513280,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7758,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1242956416,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Memory of Wulfrin Bloodbeard",
+      "id": "collection-1242956416-352436320-3470108160",
+      "name": "Recover the Memory of Wulfrin Bloodbeard",
+      "objective_uid": 3470108160,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7759,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1242956416,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Memory of Grylla the Frostfire",
+      "id": "collection-1242956416-352436320-745749760",
+      "name": "Recover the Memory of Grylla the Frostfire",
+      "objective_uid": 745749760,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7760,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1242956416,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Memory of Elder Tomakar",
+      "id": "collection-1242956416-352436320-1102156672",
+      "name": "Recover the Memory of Elder Tomakar",
+      "objective_uid": 1102156672,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7761,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1242956416,
+      "record": "",
+      "task_uid": 352436320
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Aether Crystals for Kasparov",
+      "id": "collection-392259872-911363392-175627840",
+      "name": "Collect Aether Crystals for Kasparov",
+      "objective_uid": 175627840,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7899,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 392259872,
+      "record": "",
+      "task_uid": 911363392
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Scrap for Barnabas",
+      "id": "collection-858562816-3069872640-1821820032",
+      "name": "Collect Scrap for Barnabas",
+      "objective_uid": 1821820032,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 7969,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 858562816,
+      "record": "",
+      "task_uid": 3069872640
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Dynamite",
+      "id": "collection-1930365568-3766062592-4167013888",
+      "name": "Collect Dynamite",
+      "objective_uid": 4167013888,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8007,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1930365568,
+      "record": "",
+      "task_uid": 3766062592
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Milton Hart's Amulet",
+      "id": "collection-969015040-3513241344-1858126976",
+      "name": "Collect Milton Hart's Amulet",
+      "objective_uid": 1858126976,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8028,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 969015040,
+      "record": "",
+      "task_uid": 3513241344
+    },
+    {
+      "enemy": false,
+      "hint": "Recover Hargate's Formula",
+      "id": "collection-783298048-2216366336-2649817344",
+      "name": "Recover Hargate's Formula",
+      "objective_uid": 2649817344,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8169,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 783298048,
+      "record": "",
+      "task_uid": 2216366336
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Slith Necklaces",
+      "id": "collection-3288263936-2153124608-2464355584",
+      "name": "Collect Slith Necklaces",
+      "objective_uid": 2464355584,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8183,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3288263936,
+      "record": "",
+      "task_uid": 2153124608
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Malleum Menhir from Angrim",
+      "id": "collection-2606548480-2399679232-4099427840",
+      "name": "Collect Malleum Menhir from Angrim",
+      "objective_uid": 4099427840,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8213,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2606548480,
+      "record": "",
+      "task_uid": 2399679232
+    },
+    {
+      "enemy": false,
+      "hint": "Collect the talisman from Elder Mathias",
+      "id": "collection-2477689344-4110661632-3048835328",
+      "name": "Collect the talisman from Elder Mathias",
+      "objective_uid": 3048835328,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 4679,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2477689344,
+      "record": "",
+      "task_uid": 4110661632
+    },
+    {
+      "enemy": false,
+      "hint": "Collect Karroz's Tome",
+      "id": "collection-437479872-2771694592-1975858688",
+      "name": "Collect Karroz's Tome",
+      "objective_uid": 1975858688,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 4973,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 437479872,
+      "record": "",
+      "task_uid": 2771694592
+    },
+    {
+      "enemy": false,
+      "hint": "Recover the Heavy Explosives",
+      "id": "collection-697793984-1950916224-2563247104",
+      "name": "Recover the Heavy Explosives",
+      "objective_uid": 2563247104,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5434,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 697793984,
+      "record": "",
+      "task_uid": 1950916224
+    },
+    {
+      "enemy": false,
+      "hint": "Assist Barrowholm to gain access to Scorv's Stash",
+      "id": "collection-2786571776-1926980608-2708606208",
+      "name": "Assist Barrowholm to gain access to Scorv's Stash",
+      "objective_uid": 2708606208,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5656,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 2786571776,
+      "record": "",
+      "task_uid": 1926980608
+    },
+    {
+      "enemy": false,
+      "hint": "Search the Barrowholm Cellar for the Ugdenbog Fetish",
+      "id": "collection-3008726784-2889666048-2531326208",
+      "name": "Search the Barrowholm Cellar for the Ugdenbog Fetish",
+      "objective_uid": 2531326208,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5666,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 3008726784,
+      "record": "",
+      "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire Creed's Pendant from Inquisitor Creed",
+      "id": "collection-1211376256-3902529280-3101228544",
+      "name": "Acquire Creed's Pendant from Inquisitor Creed",
+      "objective_uid": 3101228544,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5679,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1211376256,
+      "record": "",
+      "task_uid": 3902529280
+    },
+    {
+      "enemy": false,
+      "hint": "Bring Ulgrim's Keepsake to the Altar of Rattosh",
+      "id": "collection-1796338688-1286658816-3778752256",
+      "name": "Bring Ulgrim's Keepsake to the Altar of Rattosh",
+      "objective_uid": 3778752256,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 5707,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 1796338688,
+      "record": "",
+      "task_uid": 1286658816
+    },
+    {
+      "enemy": false,
+      "hint": "Acquire Creed's Additive",
+      "id": "collection-4073285376-2027399040-2847328000",
+      "name": "Acquire Creed's Additive",
+      "objective_uid": 2847328000,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 6121,
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Graph-reviewed item collection identity; not yet live verified. No coordinates or entity mapping inferred."
+      },
+      "quest_uid": 4073285376,
+      "record": "",
+      "task_uid": 2027399040
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134350157896820298-101",
+      "name": "Recover the Resistance Bomb (0/1)",
+      "objective_uid": 2452647680,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "recorded_utc_filetime": "time-134350157896820298-102",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 4073285376,
+      "record": "",
+      "task_uid": 2027399040
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to a recorded location",
+      "id": "objective-134355272595965390-2",
+      "name": "Slay the Guardians of the Sanctum of Flesh",
+      "objective_uid": 3548735232,
+      "provenance": {
+        "coordinate_frame": "game world XYZ",
+        "game_build": "24825149",
+        "kind": "user_objective_mapping",
+        "recorded_utc_filetime": "time-134355272595965390-3",
+        "source": "in-game recorder",
+        "verification": "user-recorded; not a verified spawn"
+      },
+      "quest_uid": 1034538944,
+      "record": "",
+      "task_uid": 1293631872
     }
   ],
   "transitions": [],
