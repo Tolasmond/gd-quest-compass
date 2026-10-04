@@ -5853,6 +5853,60 @@
       "quest_uid": 2345271808,
       "record": "records/creatures/npcs/questnpcs/gdaread/npc_inquisitorcreed_02.dbr",
       "task_uid": 2889666048
+    },
+    {
+      "enemy": false,
+      "hint": "Travel to Devil's Crossing",
+      "id": "npc-3432925952-2891520768-3734155520",
+      "name": "Constance",
+      "objective_uid": 3734155520,
+      "provenance": {
+        "completion_nodes": [
+          10253
+        ],
+        "coordinate_frame": "gd-cli region offset plus local placement (game world XYZ)",
+        "database_sha256": "080a5309b647991372f771119196214e74e6801b317fa7f9bce6296d33c306b7",
+        "game_build": "24825149",
+        "importer": "npc-objective-import-v1",
+        "kind": "gd_cli_objective_mapping",
+        "objective_text": "Return the Fabric to Constance in Devil's Crossing",
+        "prerequisite_review": "October 4: player confirms 1.1 then 1.2 order; quest graph nodes 8139/8140/8141 require three quest_fabric.dbr items before return. Preserved seamstress-premature-return-20261004.log tick 1519472671 confirms both objectives unfinished, collection 0/3. Gate on live quest satisfaction.",
+        "quest_path": "quests/sq_restoredc.qst",
+        "relationship": "recipient text + exact task completion conversation",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "text/graph reviewed import; static placement, not live verified"
+      },
+      "quest_uid": 3432925952,
+      "record": "records/creatures/npcs/flavornpcs/devilscrossing/npc_constance_01.dbr",
+      "requires_completed": [
+        {
+          "objective_uid": 3910081024,
+          "task_uid": 2891520768
+        }
+      ],
+      "task_uid": 2891520768
+    },
+    {
+      "enemy": false,
+      "hint": "Collect 3 Fabric in the Abandoned Waterfront in Burrwitch",
+      "id": "seamstress-collect-fabric",
+      "name": "Collect Fabric",
+      "objective_uid": 3910081024,
+      "provenance": {
+        "coordinate_frame": "none - search hint only",
+        "game_build": "24825149",
+        "kind": "reviewed_objective_mapping",
+        "objective_node": 8140,
+        "quest_path": "quests/sq_restoredc.qst",
+        "required_item_record": "records/items/questitems/quest_fabric.dbr",
+        "source": "data/npc-guidance/quest-graphs.json",
+        "source_sha256": "fbf16a6fabd70bdbc0522700bc2e81981e7a23a1ff750a49f292d704a6551f82",
+        "verification": "Exact IDs confirmed in seamstress-premature-return-20261004.log tick 1519472671; task description reviewed. No fabric coordinates inferred."
+      },
+      "quest_uid": 3432925952,
+      "record": "",
+      "task_uid": 2891520768
     }
   ],
   "transitions": [],
