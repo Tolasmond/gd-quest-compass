@@ -138,7 +138,7 @@ death, or disappearance alone does not complete or reactivate an objective.
 ## Guide files
 
 - `data/guide/defaults.json`: baseline guide definitions informed by extracted
-  game data and reviewed mappings.
+  game data.
 - `data/guide/personal.json`: public recorded locations, links, and overrides.
 - `data/guide/quest-entities.json`: character choices used by the Recorder.
 
@@ -151,8 +151,7 @@ for editing and recovery details.
 
 This project would not have been possible without
 [nonoroazoro's gd-cli](https://github.com/nonoroazoro/gd-cli). Its game-data
-queries made the guide's quest, entity, and location research possible. The
-published guide also includes separately reviewed and recorded locations.
+queries made the guide's quest, entity, and location research possible.
 
 The position-reading approach is adapted from
 [Grimdark](https://github.com/ahicks92/grimdark). Microsoft Detours source is

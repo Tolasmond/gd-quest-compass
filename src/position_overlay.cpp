@@ -40,6 +40,10 @@ struct QuestRow {
     bool detailsValid;
 };
 constexpr unsigned DetailPageRows = 5;
+// Six shortcut rows at up to 20 pixels each, plus bottom padding.
+constexpr int PanelFooterHeight = 132;
+constexpr int PanelBaseHeight = 570 + PanelFooterHeight;
+constexpr int PanelMinimumHeight = PanelBaseHeight + 24;
 unsigned detailPage = 0; // Window-thread diagnostic page, not navigation selection.
 size_t detailAnchor = 0;
 bool taskFocusInitialized = false;
@@ -971,8 +975,8 @@ bool Matches(HMODULE dll, DWORD stamp, DWORD size) {
 }
 bool Install() {
     HMODULE game = GetModuleHandleW(L"Game.dll"), engine = GetModuleHandleW(L"Engine.dll");
-    // Only the two binaries inspected on 2026-09-20 are admitted.
-    if (!Matches(game, 0x6A85FBB3, 0xAB5000) || !Matches(engine, 0x6A85FB5B, 0x450000)) {
+    // Only the binary pair inspected on 2026-10-10 (Steam build 25813250) is admitted.
+    if (!Matches(game, 0x6AC7F64B, 0xAE6000) || !Matches(engine, 0x6AC7F5F7, 0x450000)) {
         Log("Unsupported Game.dll / Engine.dll fingerprint; no hook installed.");
         Log("Game update reminder: use gd-cli init to rebuild the extracted database from the updated game installation. Preserve personal recordings separately. Verify overlay compatibility before updating accepted fingerprints; a fresh database alone does not make the overlay compatible.");
         Log("For gd-cli init, use the installation directory of the running Grim Dawn executable.");
@@ -1169,9 +1173,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
             Sample s = Snapshot();
             unsigned rows = s.quests.valid && s.quests.count ? s.quests.count : 1;
             if (rows > VisibleQuestRows) rows = VisibleQuestRows;
-            int height = 680 + static_cast<int>(rows) * 24;
+            int height = PanelBaseHeight + static_cast<int>(rows) * 24;
             int maxHeight = client.bottom - 114;
-            if (height > maxHeight && maxHeight >= 704) height = maxHeight;
+            if (height > maxHeight && maxHeight >= PanelMinimumHeight) height = maxHeight;
             if (ShowPanel(displayMode)) SetWindowPos(hwnd, HWND_TOPMOST, origin.x + 24, origin.y + 90, 460, height,
                 SWP_NOACTIVATE | SWP_SHOWWINDOW);
             else ShowWindow(hwnd, SW_HIDE);
@@ -1306,7 +1310,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
             RECT row{16, y, 444, y+24};
             DrawTextW(dc, questsLive ? L"No tracked quests" : L"Quest list unavailable", -1, &row, DT_LEFT);
         } else {
-            unsigned capacity = bounds.bottom >= 704 ? static_cast<unsigned>((bounds.bottom - 680) / 24) : 1;
+            unsigned capacity = bounds.bottom >= PanelMinimumHeight ? static_cast<unsigned>((bounds.bottom - PanelBaseHeight) / 24) : 1;
             if (capacity > VisibleQuestRows) capacity = VisibleQuestRows;
             unsigned shown = s.quests.count < capacity ? s.quests.count : capacity;
             // Keep the selected quest visible when the list exceeds panel height.
@@ -1324,7 +1328,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
                 RECT row{16, y, 444, y+24}; DrawTextW(dc, text, -1, &row, DT_LEFT);
             }
         }
-        int detailTop = bounds.bottom-388;
+        int detailTop = bounds.bottom - PanelFooterHeight - 278;
         SetTextColor(dc, RGB(121, 218, 191)); RECT detailHeading{16, detailTop, 444, detailTop+24};
         DrawTextW(dc, L"TASKS / OBJECTIVES | > destination", -1, &detailHeading, DT_LEFT);
         SetTextColor(dc, RGB(239, 241, 244));
@@ -1351,7 +1355,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
             SetTextColor(dc, RGB(163, 176, 190)); RECT page{16, detailTop+252, 444, detailTop+274};
             DrawTextW(dc, text, -1, &page, DT_LEFT);
         }
-        SetTextColor(dc, RGB(163, 176, 190)); RECT footer{16, bounds.bottom-110, 444, bounds.bottom-2};
+        SetTextColor(dc, RGB(163, 176, 190)); RECT footer{16, bounds.bottom-PanelFooterHeight, 444, bounds.bottom-12};
         DrawTextW(dc, L"Ctrl+Shift+F7   Record waypoint\nCtrl+Shift+F8   Open guide recorder\nCtrl+Shift+F9   Next approach / target\nCtrl+Shift+F10  Cycle display mode\nCtrl+Shift+F11  Next tracked quest\nCtrl+Shift+F12  Next details page", -1, &footer, DT_LEFT);
         SelectObject(dc, old);
         if(buffered) {
